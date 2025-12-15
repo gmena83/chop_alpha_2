@@ -33,26 +33,42 @@
     "language": "Idioma"
   },
   "home": {
+    "tagline": "Apoyando a Conductores Adolescentes Neurodivergentes",
     "heroTitle": "Apoyando el Viaje de Su Familia Hacia la Movilidad Independiente",
-    "heroSubtitle": "Un programa integral diseñado para ayudar a familias de adolescentes neurodivergentes a navegar el camino hacia la independencia de conducir.",
+    "heroSubtitle": "Un programa integral diseñado para ayudar a familias de adolescentes neurodivergentes a navegar el camino hacia la independencia de conducir con orientación basada en evidencia y apoyo personalizado.",
     "getStarted": "Comenzar",
-    "learnMore": "Más Información",
+    "learnMore": "Explorar Módulos",
+    "featuresTitle": "Sistema de Apoyo Integral",
+    "featuresSubtitle": "Nuestra plataforma proporciona todo lo que necesita para apoyar el viaje de su familia hacia la independencia de conducir.",
+    "journeyTitle": "Su Viaje de Aprendizaje",
     "features": {
       "modules": {
         "title": "Módulos Interactivos",
-        "description": "Cuatro módulos completos que cubren desde la preparación pre-permiso hasta aprender a conducir."
+        "description": "Cuatro módulos completos que cubren desde la preparación pre-permiso hasta aprender a conducir con contenido y actividades atractivas."
       },
       "assessments": {
         "title": "Evaluaciones Personalizadas",
-        "description": "Recomendaciones individualizadas basadas en las necesidades únicas de su familia."
+        "description": "Recomendaciones individualizadas y la Escala de Empoderamiento Familiar para rastrear la preparación y el progreso."
       },
       "progress": {
         "title": "Seguimiento de Progreso",
-        "description": "Rastree hitos y celebre logros en el camino."
+        "description": "Rastree hitos, celebre logros y monitoree el progreso de adquisición del permiso."
       },
       "coaching": {
-        "title": "Coaching Asistido por IA",
-        "description": "Obtenga respuestas a sus preguntas con nuestro asistente de coaching inteligente."
+        "title": "Coaching Experto",
+        "description": "Conéctese con coaches capacitados a través de mensajes y sesiones de video para orientación personalizada."
+      },
+      "aiCoaching": {
+        "title": "Guía Asistida por IA",
+        "description": "Obtenga respuestas instantáneas basadas en evidencia a sus preguntas de nuestro asistente de coaching inteligente."
+      },
+      "telecoaching": {
+        "title": "Sesiones de Telecoaching",
+        "description": "Programe sesiones de video con coaches certificados para apoyo y orientación en tiempo real."
+      },
+      "security": {
+        "title": "Cumple con HIPAA",
+        "description": "La información de su familia está protegida con seguridad y estándares de privacidad de nivel empresarial."
       }
     }
   },

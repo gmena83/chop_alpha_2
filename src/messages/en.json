@@ -33,26 +33,42 @@
     "language": "Language"
   },
   "home": {
+    "tagline": "Supporting Neurodivergent Teen Drivers",
     "heroTitle": "Supporting Your Family's Journey to Independent Mobility",
-    "heroSubtitle": "A comprehensive program designed to help families of neurodivergent teens navigate the path to driving independence.",
+    "heroSubtitle": "A comprehensive program designed to help families of neurodivergent teens navigate the path to driving independence with evidence-based guidance and personalized support.",
     "getStarted": "Get Started",
-    "learnMore": "Learn More",
+    "learnMore": "Explore Modules",
+    "featuresTitle": "Comprehensive Support System",
+    "featuresSubtitle": "Our platform provides everything you need to support your family's journey to driving independence.",
+    "journeyTitle": "Your Learning Journey",
     "features": {
       "modules": {
         "title": "Interactive Modules",
-        "description": "Four comprehensive modules covering pre-permit preparation through learning to drive."
+        "description": "Four comprehensive modules covering pre-permit preparation through learning to drive with engaging content and activities."
       },
       "assessments": {
         "title": "Personalized Assessments",
-        "description": "Individualized recommendations based on your family's unique needs."
+        "description": "Individualized recommendations and the Family Empowerment Scale to track readiness and progress."
       },
       "progress": {
         "title": "Progress Tracking",
-        "description": "Track milestones and celebrate achievements along the way."
+        "description": "Track milestones, celebrate achievements, and monitor permit acquisition progress."
       },
       "coaching": {
-        "title": "AI-Assisted Coaching",
-        "description": "Get answers to your questions with our intelligent coaching assistant."
+        "title": "Expert Coaching",
+        "description": "Connect with trained coaches through messaging and video sessions for personalized guidance."
+      },
+      "aiCoaching": {
+        "title": "AI-Assisted Guidance",
+        "description": "Get instant, evidence-based answers to your questions from our intelligent coaching assistant."
+      },
+      "telecoaching": {
+        "title": "Telecoaching Sessions",
+        "description": "Schedule video sessions with certified coaches for real-time support and guidance."
+      },
+      "security": {
+        "title": "HIPAA Compliant",
+        "description": "Your family's information is protected with enterprise-grade security and privacy standards."
       }
     }
   },
