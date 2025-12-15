@@ -43,3 +43,9 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[userenv]
+
+[userenv.shared]
+AUTH_SECRET = "/obAmhSYlhFXNJqP7i9Fp15UjCX0/hRK/6tWOVKiVmo="
+AUTH_TRUST_HOST = "true"
