@@ -31,7 +31,9 @@ export default function HomePage() {
             <Link href="/modules">
               <Button variant="ghost">{t("nav.modules")}</Button>
             </Link>
-            <Button>{t("nav.signIn")}</Button>
+            <Link href="/auth/login">
+              <Button>{t("nav.signIn")}</Button>
+            </Link>
           </nav>
         </div>
       </header>
@@ -46,10 +48,14 @@ export default function HomePage() {
               {t("home.heroSubtitle")}
             </p>
             <div className="flex gap-4 pt-4">
-              <Button size="lg">{t("home.getStarted")}</Button>
-              <Button variant="outline" size="lg">
-                {t("home.learnMore")}
-              </Button>
+              <Link href="/auth/register">
+                <Button size="lg">{t("home.getStarted")}</Button>
+              </Link>
+              <Link href="/modules">
+                <Button variant="outline" size="lg">
+                  {t("home.learnMore")}
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

@@ -100,9 +100,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.id;
-        session.user.role = token.role;
-        session.user.localePreference = token.localePreference;
+        session.user.id = token.id as string;
+        session.user.role = token.role as UserRole;
+        session.user.localePreference = token.localePreference as 'en' | 'es';
       }
       return session;
     },
