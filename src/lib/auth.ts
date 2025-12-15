@@ -6,6 +6,7 @@ import { users, accounts, sessions, verificationTokens, type UserRole } from '..
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
+import { logLoginSuccess, logLoginFailure } from './audit';
 
 declare module 'next-auth' {
   interface Session {
@@ -61,10 +62,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           .where(eq(users.email, email))
           .limit(1);
 
-        if (!user || !user.password) return null;
+        if (!user || !user.password) {
+          logLoginFailure(email, 'User not found or no password set').catch(() => {});
+          return null;
+        }
 
         const isValid = await bcrypt.compare(password, user.password);
-        if (!isValid) return null;
+        if (!isValid) {
+          logLoginFailure(email, 'Invalid password').catch(() => {});
+          return null;
+        }
 
         return {
           id: user.id,
@@ -77,6 +84,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
+    async signIn({ user }) {
+      if (user?.id) {
+        logLoginSuccess(user.id).catch(() => {});
+      }
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id as string;

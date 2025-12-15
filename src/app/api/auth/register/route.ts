@@ -4,6 +4,7 @@ import { users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
+import { logUserRegistered } from '../../../../lib/audit';
 
 const registerSchema = z.object({
   email: z.string().email(),
@@ -56,6 +57,8 @@ export async function POST(request: NextRequest) {
         name: users.name,
         role: users.role,
       });
+
+    await logUserRegistered(newUser.id, newUser.email);
 
     return NextResponse.json(
       { message: 'User registered successfully', user: newUser },
