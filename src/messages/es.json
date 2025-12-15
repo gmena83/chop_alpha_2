@@ -18,7 +18,8 @@
     "edit": "Editar",
     "view": "Ver",
     "yes": "Sí",
-    "no": "No"
+    "no": "No",
+    "retry": "Intentar de Nuevo"
   },
   "nav": {
     "home": "Inicio",
@@ -56,8 +57,26 @@
     }
   },
   "modules": {
+    "title": "Módulos de Aprendizaje",
+    "subtitle": "Complete estos módulos a su propio ritmo para apoyar el viaje de su familia hacia la independencia de conducir.",
     "phase1": "Fase 1: Apoyo Pre-Permiso",
     "phase2": "Fase 2: Aprendiendo a Conducir",
+    "prePermitDescription": "Preparación antes de obtener el permiso de aprendizaje",
+    "learningToDriveDescription": "Apoyo durante la fase de instrucción de conducir",
+    "minutes": "min",
+    "backToModules": "Volver a Módulos",
+    "stepsTitle": "Pasos del Módulo",
+    "noSteps": "Aún no hay pasos disponibles para este módulo.",
+    "startModule": "Iniciar Módulo",
+    "required": "Requerido",
+    "view": "Ver",
+    "stepTypes": {
+      "content": "Lectura",
+      "video": "Video",
+      "checklist": "Lista de Verificación",
+      "assessment": "Evaluación",
+      "interactive": "Actividad Interactiva"
+    },
     "module1": {
       "title": "Preparándose para la Movilidad Independiente",
       "description": "Desarrollando habilidades esenciales para la vida para la independencia de transporte."

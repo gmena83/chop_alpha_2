@@ -18,7 +18,8 @@
     "edit": "Edit",
     "view": "View",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "retry": "Try Again"
   },
   "nav": {
     "home": "Home",
@@ -56,8 +57,26 @@
     }
   },
   "modules": {
+    "title": "Learning Modules",
+    "subtitle": "Complete these modules at your own pace to support your family's journey to driving independence.",
     "phase1": "Phase 1: Pre-Permit Support",
     "phase2": "Phase 2: Learning to Drive",
+    "prePermitDescription": "Preparation before getting a learner's permit",
+    "learningToDriveDescription": "Support during the driving instruction phase",
+    "minutes": "min",
+    "backToModules": "Back to Modules",
+    "stepsTitle": "Module Steps",
+    "noSteps": "No steps available for this module yet.",
+    "startModule": "Start Module",
+    "required": "Required",
+    "view": "View",
+    "stepTypes": {
+      "content": "Reading",
+      "video": "Video",
+      "checklist": "Checklist",
+      "assessment": "Assessment",
+      "interactive": "Interactive Activity"
+    },
     "module1": {
       "title": "Preparing for Independent Mobility",
       "description": "Building essential life skills for transportation independence."
