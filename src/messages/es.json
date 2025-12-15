@@ -1,0 +1,128 @@
+{
+  "common": {
+    "appName": "Plataforma ETA",
+    "tagline": "Transición Ejecutiva para Autismo/TDAH",
+    "welcome": "Bienvenido a la Plataforma ETA",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "close": "Cerrar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "export": "Exportar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "view": "Ver",
+    "yes": "Sí",
+    "no": "No"
+  },
+  "nav": {
+    "home": "Inicio",
+    "modules": "Módulos",
+    "assessments": "Evaluaciones",
+    "progress": "Mi Progreso",
+    "profile": "Perfil",
+    "admin": "Administración",
+    "signIn": "Iniciar Sesión",
+    "signOut": "Cerrar Sesión",
+    "language": "Idioma"
+  },
+  "home": {
+    "heroTitle": "Apoyando el Viaje de Su Familia Hacia la Movilidad Independiente",
+    "heroSubtitle": "Un programa integral diseñado para ayudar a familias de adolescentes neurodivergentes a navegar el camino hacia la independencia de conducir.",
+    "getStarted": "Comenzar",
+    "learnMore": "Más Información",
+    "features": {
+      "modules": {
+        "title": "Módulos Interactivos",
+        "description": "Cuatro módulos completos que cubren desde la preparación pre-permiso hasta aprender a conducir."
+      },
+      "assessments": {
+        "title": "Evaluaciones Personalizadas",
+        "description": "Recomendaciones individualizadas basadas en las necesidades únicas de su familia."
+      },
+      "progress": {
+        "title": "Seguimiento de Progreso",
+        "description": "Rastree hitos y celebre logros en el camino."
+      },
+      "coaching": {
+        "title": "Coaching Asistido por IA",
+        "description": "Obtenga respuestas a sus preguntas con nuestro asistente de coaching inteligente."
+      }
+    }
+  },
+  "modules": {
+    "phase1": "Fase 1: Apoyo Pre-Permiso",
+    "phase2": "Fase 2: Aprendiendo a Conducir",
+    "module1": {
+      "title": "Preparándose para la Movilidad Independiente",
+      "description": "Desarrollando habilidades esenciales para la vida para la independencia de transporte."
+    },
+    "module2": {
+      "title": "Listo para Aprender a Conducir",
+      "description": "Evaluando la preparación y preparándose para el proceso de permiso."
+    },
+    "module3": {
+      "title": "Aprendiendo a Conducir",
+      "description": "Apoyando el proceso de instrucción de conducir con orientación práctica."
+    },
+    "module4": {
+      "title": "Convirtiéndose en un Conductor Independiente",
+      "description": "Transición a hábitos de conducción independientes y seguros."
+    }
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signUp": "Crear Cuenta",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "forgotPassword": "¿Olvidó su Contraseña?",
+    "noAccount": "¿No tiene una cuenta?",
+    "hasAccount": "¿Ya tiene una cuenta?",
+    "invalidCredentials": "Correo electrónico o contraseña inválidos"
+  },
+  "roles": {
+    "parent": "Padre/Madre",
+    "teen": "Adolescente",
+    "professional": "Profesional",
+    "coach": "Coach",
+    "chopAdmin": "Admin CHOP",
+    "chopResearcher": "Investigador CHOP",
+    "siteAdmin": "Admin del Sitio"
+  },
+  "assessments": {
+    "title": "Evaluaciones",
+    "familyEmpowerment": "Escala de Empoderamiento Familiar",
+    "drivingReadiness": "Evaluación de Preparación para Conducir",
+    "startAssessment": "Comenzar Evaluación",
+    "continueAssessment": "Continuar Evaluación",
+    "viewResults": "Ver Resultados",
+    "completed": "Completado",
+    "inProgress": "En Progreso",
+    "notStarted": "No Iniciado"
+  },
+  "progress": {
+    "title": "Tu Progreso",
+    "overallProgress": "Progreso General",
+    "milestones": "Hitos",
+    "recentActivity": "Actividad Reciente",
+    "achievements": "Logros",
+    "noActivity": "Sin actividad reciente"
+  },
+  "admin": {
+    "dashboard": "Panel de Control",
+    "users": "Gestión de Usuarios",
+    "content": "Gestión de Contenido",
+    "studies": "Estudios de Investigación",
+    "analytics": "Analíticas",
+    "exports": "Exportación de Datos",
+    "settings": "Configuración"
+  }
+}

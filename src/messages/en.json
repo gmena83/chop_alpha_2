@@ -1,0 +1,128 @@
+{
+  "common": {
+    "appName": "ETA Platform",
+    "tagline": "Executive Transition for Autism/ADHD",
+    "welcome": "Welcome to the ETA Platform",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "nav": {
+    "home": "Home",
+    "modules": "Modules",
+    "assessments": "Assessments",
+    "progress": "My Progress",
+    "profile": "Profile",
+    "admin": "Admin",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "language": "Language"
+  },
+  "home": {
+    "heroTitle": "Supporting Your Family's Journey to Independent Mobility",
+    "heroSubtitle": "A comprehensive program designed to help families of neurodivergent teens navigate the path to driving independence.",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "features": {
+      "modules": {
+        "title": "Interactive Modules",
+        "description": "Four comprehensive modules covering pre-permit preparation through learning to drive."
+      },
+      "assessments": {
+        "title": "Personalized Assessments",
+        "description": "Individualized recommendations based on your family's unique needs."
+      },
+      "progress": {
+        "title": "Progress Tracking",
+        "description": "Track milestones and celebrate achievements along the way."
+      },
+      "coaching": {
+        "title": "AI-Assisted Coaching",
+        "description": "Get answers to your questions with our intelligent coaching assistant."
+      }
+    }
+  },
+  "modules": {
+    "phase1": "Phase 1: Pre-Permit Support",
+    "phase2": "Phase 2: Learning to Drive",
+    "module1": {
+      "title": "Preparing for Independent Mobility",
+      "description": "Building essential life skills for transportation independence."
+    },
+    "module2": {
+      "title": "Ready to Learn to Drive",
+      "description": "Assessing readiness and preparing for the permit process."
+    },
+    "module3": {
+      "title": "Learning to Drive",
+      "description": "Supporting the driving instruction process with practical guidance."
+    },
+    "module4": {
+      "title": "Becoming an Independent Driver",
+      "description": "Transitioning to independent, safe driving habits."
+    }
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "invalidCredentials": "Invalid email or password"
+  },
+  "roles": {
+    "parent": "Parent",
+    "teen": "Teen",
+    "professional": "Professional",
+    "coach": "Coach",
+    "chopAdmin": "CHOP Admin",
+    "chopResearcher": "CHOP Researcher",
+    "siteAdmin": "Site Admin"
+  },
+  "assessments": {
+    "title": "Assessments",
+    "familyEmpowerment": "Family Empowerment Scale",
+    "drivingReadiness": "Driving Readiness Assessment",
+    "startAssessment": "Start Assessment",
+    "continueAssessment": "Continue Assessment",
+    "viewResults": "View Results",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "notStarted": "Not Started"
+  },
+  "progress": {
+    "title": "Your Progress",
+    "overallProgress": "Overall Progress",
+    "milestones": "Milestones",
+    "recentActivity": "Recent Activity",
+    "achievements": "Achievements",
+    "noActivity": "No recent activity"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "users": "User Management",
+    "content": "Content Management",
+    "studies": "Research Studies",
+    "analytics": "Analytics",
+    "exports": "Data Exports",
+    "settings": "Settings"
+  }
+}
