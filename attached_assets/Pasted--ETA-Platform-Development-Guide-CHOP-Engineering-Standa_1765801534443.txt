@@ -1,0 +1,325 @@
+# ETA Platform Development Guide (CHOP) — Engineering Standards
+
+This document defines the default architecture, coding conventions, and security-by-design practices for the ETA (Executive Transition for Autism/ADHD) platform.
+
+---
+
+## 1) Target Outcomes
+
+- Secure, web-based interactive platform for parents (primary), teens and professionals (secondary).
+- Four intervention modules across two phases (Pre-Permit, Learning-to-Drive).
+- Assessments + individualized guidance, progress tracking, milestone celebrations.
+- Bilingual (English/Spanish) end-to-end.
+- Administrative backend for CHOP research staff: user management, content updates, analytics, exports, randomization.
+- AI-assisted coaching grounded in CHOP-approved content (RAG, guardrails).
+- HIPAA/FERPA-aligned design, audit trails, and export-ready research dataset outputs.
+
+---
+
+## 2) Recommended Modern Stack (Default)
+
+### Web / App
+- **Next.js (App Router) + TypeScript**
+- **React** + **Tailwind CSS**
+- **shadcn/ui** component library
+- **next-intl** (or equivalent) for i18n, locale routing, and translation extraction
+- **TanStack Query** for client data fetching and caching
+- **React Hook Form + Zod** for validated forms
+
+### API / Server
+Choose one and stay consistent:
+- **Option A (simpler for early build):** Next.js Route Handlers as API layer
+- **Option B (enterprise separation):** **Fastify** service (`apps/api`) with OpenAPI
+
+Either way:
+- **PostgreSQL**
+- **Drizzle ORM** (or Prisma if the team standardizes on it)
+- **Redis** (optional): queues/rate-limits/background jobs
+
+### AuthN / AuthZ
+- **Auth.js (NextAuth)** with **OIDC/SAML-ready** configuration (for future CHOP SSO)
+- Role-based access control (RBAC) + optional attribute-based checks (ABAC)
+- Session strategy: database-backed sessions preferred for auditability
+
+### Observability / Ops
+- Structured logging: **pino** (server), browser logs minimized
+- Tracing: OpenTelemetry (as integration work)
+- Error reporting: Sentry (or equivalent)
+
+### Testing
+- Unit: **Vitest**
+- Component: Testing Library
+- E2E: Playwright (preferred)
+
+### Dev Tooling
+- pnpm, ESLint, Prettier, TypeScript strict mode
+- Husky + lint-staged
+- Conventional commits
+
+---
+
+## 3) Architecture Principles
+
+1. **Modular by Domain**
+   - Organize code by domain feature: `auth`, `users`, `modules`, `assessments`, `telecoaching`, `ai-coach`, `admin`, `analytics`, `content`.
+2. **Thin UI, Typed Contracts**
+   - All API requests/response shapes defined as shared Zod schemas.
+3. **Security-by-Default**
+   - Least privilege access, safe defaults, deny-by-default policies, strong audit logging.
+4. **Internationalization First**
+   - All user-facing strings via translation keys; no hard-coded text.
+5. **Accessibility**
+   - WCAG-aligned components, keyboard navigability, captions/transcripts for video content.
+6. **HIPAA/FERPA Design Constraints**
+   - Minimize PHI; isolate identifiers; implement data retention rules and export controls.
+
+---
+
+## 4) Repository Layout (Monorepo)
+
+Recommended:
+/apps
+/web # Next.js app
+/api # Fastify (optional) or shared server utilities
+/packages
+/db # schema, migrations, query helpers
+/shared # Zod schemas, types, constants
+/ui # shared design system components
+/content # content model + versioned seed data
+/security # authz, policies, audit helpers
+
+markdown
+Copy code
+
+---
+
+## 5) File Size and Modularity Rules
+
+- **Hard limit:** 300 lines per file (preferred), 500 lines maximum with justification.
+- **One concept per file:** one React component, one service, one route handler, etc.
+- **No “god components”:** if a component exceeds ~200 lines, extract subcomponents/hooks.
+- **No “god services”:** split by responsibility (e.g., `AssessmentScoringService`, `RandomizationService`).
+
+---
+
+## 6) Domain Model (Core Concepts)
+
+### Users / Roles
+- Roles: `PARENT`, `TEEN`, `PROFESSIONAL`, `COACH`, `CHOP_ADMIN`, `CHOP_RESEARCHER`, `SITE_ADMIN`
+- Profiles link a user to a household/family and optionally a research study enrollment.
+
+### Modules and Phases
+- Phase 1 (Pre-Permit): Modules 1–2
+- Phase 2 (Learning-to-Drive): Modules 3–4
+- Each module is a sequence of **steps** (content, videos, checklists, assessments).
+
+### Assessments
+- Store:
+  - raw responses (normalized)
+  - computed scores
+  - recommendation outputs
+  - scoring version (for reproducibility)
+
+### Study / Research
+- Study protocols include:
+  - randomization arms
+  - eligibility flags
+  - consent records (e-sign)
+  - export templates
+
+### Telecoaching
+- Messaging + scheduling + video session links (initially stub; integrate later).
+- Separate “communication log” table for audit.
+
+---
+
+## 7) Data and Security Controls
+
+### Data Classification
+- Separate:
+  - **Identity** (names, emails) from
+  - **Research data** (assessment responses, progress events)
+- Use surrogate keys and avoid embedding PHI in logs, URLs, and analytics payloads.
+
+### Audit Logging (Required)
+Log security-relevant events:
+- auth: login/logout/failed attempts
+- role changes
+- admin actions
+- consent changes
+- exports and downloads
+- AI coach queries (metadata only, with PHI redaction)
+
+Schema concept:
+- `audit_log(id, actor_user_id, action, target_type, target_id, ip, user_agent, metadata_json, created_at)`
+
+### Encryption
+- In transit: TLS everywhere.
+- At rest: database encryption at provider level; application-level encryption for high-risk fields (optional).
+
+### Rate Limiting and Abuse Protection
+- Per-IP and per-user throttles for:
+  - auth endpoints
+  - AI coach endpoint
+  - messaging endpoints
+
+### Content Safety for AI
+- No free-form medical advice.
+- RAG must be grounded in a CHOP-approved, versioned knowledge base.
+- Implement:
+  - prompt injection defenses
+  - citation requirements (internal references)
+  - “I don’t know / contact your clinician” fallback behavior
+  - human escalation routes (telecoach/admin)
+
+---
+
+## 8) Internationalization (English / Spanish)
+
+- Use locale routing (`/en`, `/es`) and keep content keys stable.
+- Content model supports bilingual fields:
+  - `title_en`, `title_es`, `body_md_en`, `body_md_es`
+- Validation rules must support both languages.
+- All videos need:
+  - captions
+  - transcript per locale
+
+---
+
+## 9) UI/UX and Accessibility
+
+- Use shadcn/ui primitives; avoid custom components unless needed.
+- Ensure:
+  - focus states
+  - accessible forms (aria labels)
+  - readable typography
+  - reduced motion support
+- Provide teen-friendly and parent-friendly modes via content/labels (not separate apps).
+
+---
+
+## 10) Admin Console Requirements
+
+Must include:
+- User search and management (role assignment, status)
+- Content management (module steps, videos, translations)
+- Study setup (arms, eligibility flags, randomization)
+- Analytics dashboard (progress, completion, scale scores)
+- Exports:
+  - CSV (research-ready)
+  - audit extracts
+  - configurable date ranges
+
+---
+
+## 11) Analytics and Events
+
+### Event Model
+Create a minimal event bus table:
+- `event(id, user_id, family_id, type, payload_json, created_at)`
+
+Examples:
+- `MODULE_STEP_COMPLETED`
+- `ASSESSMENT_SUBMITTED`
+- `VIDEO_WATCHED`
+- `MILESTONE_UNLOCKED`
+
+---
+
+## 12) Testing Standards
+
+- Unit tests for:
+  - scoring engines
+  - recommendation logic
+  - randomization logic
+  - permissions policies
+- E2E tests for:
+  - login + onboarding
+  - module progression
+  - admin export
+  - i18n locale switching
+
+Coverage targets (pragmatic):
+- 80% for domain services and utilities.
+
+---
+
+## 13) Coding Conventions
+
+- TypeScript `strict: true`.
+- Prefer `const` and immutable data transformations.
+- Avoid “any”; use Zod inference and typed DTOs.
+- Use dependency injection patterns at service boundaries (even if lightweight).
+
+### Naming
+- Components: `PascalCase`
+- Hooks: `useThing`
+- Server services: `ThingService`
+- DB tables: `snake_case`
+
+---
+
+## 14) Security and Privacy Checklist (Pre-Release)
+
+- [ ] All endpoints authenticated/authorized (RBAC)
+- [ ] Audit logs for admin actions and exports
+- [ ] PHI redaction for logs and AI prompts
+- [ ] Consent workflow verified and immutable changes logged
+- [ ] Export paths protected and tracked
+- [ ] Dependency scanning + lockfile committed
+- [ ] Pen test plan documented (Phase deliverable)
+
+---
+
+## 15) Definition of “MVP Skeleton”
+
+Before adding “features”, the codebase must include:
+- auth + RBAC
+- DB schema + migrations
+- module engine (steps, progress)
+- assessments framework (forms + scoring + storage)
+- bilingual framework
+- admin shell (navigation + permissions)
+- audit logging + events
+
+---
+
+## 16) Documentation Requirements
+
+Maintain:
+- `README.md` (setup, environment variables, run commands)
+- `ARCHITECTURE.md` (diagrams, module engine explanation)
+- `SECURITY.md` (threat model, controls, audit log semantics)
+- `DATA_DICTIONARY.md` (tables, fields, PII/PHI classification)
+- `API.md` (routes, schemas, example requests)
+
+---
+
+## 17) Environment Variables (Example)
+
+- `DATABASE_URL`
+- `AUTH_SECRET`
+- `AUTH_TRUST_HOST=true`
+- `NEXT_PUBLIC_APP_BASE_URL`
+- `AI_PROVIDER` (placeholder)
+- `AI_KB_VERSION`
+- `SENTRY_DSN` (optional)
+- `REDIS_URL` (optional)
+
+---
+
+## 18) Implementation Sequencing (Strongly Recommended)
+
+1. Repo scaffold + CI lint/test
+2. Auth + RBAC + audit log baseline
+3. i18n + content model + module engine
+4. Assessment system + scoring + recommendations
+5. Progress/milestones + events + analytics baseline
+6. Admin console features
+7. AI coach (RAG) with guardrails
+8. Telecoaching integrations (messaging/video) as incremental enhancements
+9. Export hardening + compliance artifacts + pen test prep
+
+---
+
+End of document.
