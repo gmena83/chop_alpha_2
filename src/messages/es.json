@@ -175,11 +175,46 @@
   },
   "progress": {
     "title": "Tu Progreso",
+    "subtitle": "Rastrea tu progreso y logros",
     "overallProgress": "Progreso General",
     "milestones": "Hitos",
     "recentActivity": "Actividad Reciente",
     "achievements": "Logros",
-    "noActivity": "Sin actividad reciente"
+    "noActivity": "Sin actividad reciente",
+    "totalPoints": "Puntos Totales",
+    "pointsEarned": "puntos ganados",
+    "achievementsEarned": "logros obtenidos",
+    "recentEvents": "eventos recientes",
+    "modules": "módulos",
+    "moduleProgress": "Progreso de Módulos",
+    "noModules": "No hay módulos disponibles",
+    "noAchievements": "Aún no tienes logros. ¡Sigue progresando!",
+    "phase": {
+      "prePermit": "Pre-Permiso",
+      "learningToDrive": "Aprendiendo a Conducir"
+    },
+    "status": {
+      "completed": "Completado",
+      "inProgress": "En Progreso",
+      "notStarted": "No Iniciado"
+    },
+    "events": {
+      "moduleStarted": "Módulo iniciado",
+      "moduleCompleted": "Módulo completado",
+      "stepStarted": "Paso iniciado",
+      "stepCompleted": "Paso completado",
+      "assessmentStarted": "Evaluación iniciada",
+      "assessmentCompleted": "Evaluación completada",
+      "milestoneEarned": "Logro obtenido",
+      "sessionStarted": "Sesión iniciada",
+      "sessionEnded": "Sesión finalizada"
+    },
+    "time": {
+      "justNow": "Justo ahora",
+      "minutesAgo": "Hace {count} min",
+      "hoursAgo": "Hace {count}h",
+      "daysAgo": "Hace {count} días"
+    }
   },
   "admin": {
     "dashboard": "Panel de Control",

@@ -274,3 +274,72 @@ export type Recommendation = typeof recommendations.$inferSelect;
 export type NewRecommendation = typeof recommendations.$inferInsert;
 export type UserRecommendation = typeof userRecommendations.$inferSelect;
 export type NewUserRecommendation = typeof userRecommendations.$inferInsert;
+
+export const milestoneTypeEnum = pgEnum('milestone_type', [
+  'module_complete',
+  'phase_complete',
+  'assessment_passed',
+  'streak',
+  'first_login',
+  'profile_complete',
+  'custom'
+]);
+
+export const milestones = pgTable('milestones', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  slug: varchar('slug', { length: 100 }).notNull().unique(),
+  milestoneType: milestoneTypeEnum('milestone_type').notNull(),
+  titleEn: varchar('title_en', { length: 255 }).notNull(),
+  titleEs: varchar('title_es', { length: 255 }).notNull(),
+  descriptionEn: text('description_en'),
+  descriptionEs: text('description_es'),
+  iconName: varchar('icon_name', { length: 50 }),
+  badgeColor: varchar('badge_color', { length: 20 }),
+  points: integer('points').notNull().default(0),
+  conditionType: varchar('condition_type', { length: 50 }).notNull(),
+  conditionValue: jsonb('condition_value').notNull(),
+  isActive: boolean('is_active').notNull().default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow()
+});
+
+export const userMilestones = pgTable('user_milestones', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  milestoneId: uuid('milestone_id').notNull().references(() => milestones.id, { onDelete: 'cascade' }),
+  earnedAt: timestamp('earned_at').notNull().defaultNow(),
+  metadata: jsonb('metadata'),
+  createdAt: timestamp('created_at').notNull().defaultNow()
+});
+
+export const progressEventTypeEnum = pgEnum('progress_event_type', [
+  'module_started',
+  'module_completed',
+  'step_started',
+  'step_completed',
+  'assessment_started',
+  'assessment_completed',
+  'milestone_earned',
+  'session_started',
+  'session_ended'
+]);
+
+export const progressEvents = pgTable('progress_events', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  familyId: uuid('family_id').references(() => families.id, { onDelete: 'set null' }),
+  eventType: progressEventTypeEnum('event_type').notNull(),
+  moduleId: uuid('module_id').references(() => modules.id, { onDelete: 'set null' }),
+  stepId: uuid('step_id').references(() => steps.id, { onDelete: 'set null' }),
+  assessmentId: uuid('assessment_id').references(() => assessments.id, { onDelete: 'set null' }),
+  milestoneId: uuid('milestone_id').references(() => milestones.id, { onDelete: 'set null' }),
+  metadata: jsonb('metadata'),
+  createdAt: timestamp('created_at').notNull().defaultNow()
+});
+
+export type Milestone = typeof milestones.$inferSelect;
+export type NewMilestone = typeof milestones.$inferInsert;
+export type UserMilestone = typeof userMilestones.$inferSelect;
+export type NewUserMilestone = typeof userMilestones.$inferInsert;
+export type ProgressEvent = typeof progressEvents.$inferSelect;
+export type NewProgressEvent = typeof progressEvents.$inferInsert;

@@ -175,11 +175,46 @@
   },
   "progress": {
     "title": "Your Progress",
+    "subtitle": "Track your progress and achievements",
     "overallProgress": "Overall Progress",
     "milestones": "Milestones",
     "recentActivity": "Recent Activity",
     "achievements": "Achievements",
-    "noActivity": "No recent activity"
+    "noActivity": "No recent activity",
+    "totalPoints": "Total Points",
+    "pointsEarned": "points earned",
+    "achievementsEarned": "achievements earned",
+    "recentEvents": "recent events",
+    "modules": "modules",
+    "moduleProgress": "Module Progress",
+    "noModules": "No modules available",
+    "noAchievements": "No achievements yet. Keep progressing!",
+    "phase": {
+      "prePermit": "Pre-Permit",
+      "learningToDrive": "Learning to Drive"
+    },
+    "status": {
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "notStarted": "Not Started"
+    },
+    "events": {
+      "moduleStarted": "Started module",
+      "moduleCompleted": "Completed module",
+      "stepStarted": "Started step",
+      "stepCompleted": "Completed step",
+      "assessmentStarted": "Started assessment",
+      "assessmentCompleted": "Completed assessment",
+      "milestoneEarned": "Earned milestone",
+      "sessionStarted": "Session started",
+      "sessionEnded": "Session ended"
+    },
+    "time": {
+      "justNow": "Just now",
+      "minutesAgo": "{count}m ago",
+      "hoursAgo": "{count}h ago",
+      "daysAgo": "{count}d ago"
+    }
   },
   "admin": {
     "dashboard": "Dashboard",
