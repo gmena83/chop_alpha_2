@@ -120,7 +120,7 @@ export const steps = pgTable('steps', {
   videoUrlEs: varchar('video_url_es', { length: 500 }),
   checklistItemsEn: jsonb('checklist_items_en'),
   checklistItemsEs: jsonb('checklist_items_es'),
-  assessmentId: uuid('assessment_id'),
+  assessmentId: uuid('assessment_id').references(() => assessments.id, { onDelete: 'set null' }),
   metadata: jsonb('metadata'),
   isRequired: boolean('is_required').notNull().default(true),
   isActive: boolean('is_active').notNull().default(true),
@@ -157,3 +157,120 @@ export type NewStep = typeof steps.$inferInsert;
 export type StepType = Step['stepType'];
 export type UserProgressEntry = typeof userProgress.$inferSelect;
 export type NewUserProgressEntry = typeof userProgress.$inferInsert;
+
+export const questionTypeEnum = pgEnum('question_type', [
+  'single_choice',
+  'multiple_choice',
+  'likert_scale',
+  'text_short',
+  'text_long',
+  'rating'
+]);
+
+export const assessments = pgTable('assessments', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  slug: varchar('slug', { length: 100 }).notNull().unique(),
+  titleEn: varchar('title_en', { length: 255 }).notNull(),
+  titleEs: varchar('title_es', { length: 255 }).notNull(),
+  descriptionEn: text('description_en'),
+  descriptionEs: text('description_es'),
+  instructionsEn: text('instructions_en'),
+  instructionsEs: text('instructions_es'),
+  estimatedMinutes: integer('estimated_minutes'),
+  passingScore: integer('passing_score'),
+  maxScore: integer('max_score'),
+  isActive: boolean('is_active').notNull().default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow()
+});
+
+export const assessmentQuestions = pgTable('assessment_questions', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  assessmentId: uuid('assessment_id').notNull().references(() => assessments.id, { onDelete: 'cascade' }),
+  orderIndex: integer('order_index').notNull(),
+  questionType: questionTypeEnum('question_type').notNull(),
+  questionTextEn: text('question_text_en').notNull(),
+  questionTextEs: text('question_text_es').notNull(),
+  helpTextEn: text('help_text_en'),
+  helpTextEs: text('help_text_es'),
+  optionsEn: jsonb('options_en'),
+  optionsEs: jsonb('options_es'),
+  correctAnswer: jsonb('correct_answer'),
+  points: integer('points').notNull().default(1),
+  isRequired: boolean('is_required').notNull().default(true),
+  isActive: boolean('is_active').notNull().default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow()
+});
+
+export const assessmentResponseStatusEnum = pgEnum('assessment_response_status', [
+  'in_progress',
+  'completed',
+  'abandoned'
+]);
+
+export const assessmentResponses = pgTable('assessment_responses', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  familyId: uuid('family_id').references(() => families.id, { onDelete: 'set null' }),
+  assessmentId: uuid('assessment_id').notNull().references(() => assessments.id, { onDelete: 'cascade' }),
+  stepId: uuid('step_id').references(() => steps.id, { onDelete: 'set null' }),
+  status: assessmentResponseStatusEnum('status').notNull().default('in_progress'),
+  answers: jsonb('answers').notNull().default('{}'),
+  score: integer('score'),
+  maxPossibleScore: integer('max_possible_score'),
+  percentageScore: integer('percentage_score'),
+  passed: boolean('passed'),
+  timeTakenSeconds: integer('time_taken_seconds'),
+  startedAt: timestamp('started_at').notNull().defaultNow(),
+  completedAt: timestamp('completed_at'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow()
+});
+
+export const recommendationTypeEnum = pgEnum('recommendation_type', [
+  'content',
+  'resource',
+  'action',
+  'followup'
+]);
+
+export const recommendations = pgTable('recommendations', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  assessmentId: uuid('assessment_id').notNull().references(() => assessments.id, { onDelete: 'cascade' }),
+  conditionType: varchar('condition_type', { length: 50 }).notNull(),
+  conditionValue: jsonb('condition_value').notNull(),
+  recommendationType: recommendationTypeEnum('recommendation_type').notNull(),
+  priority: integer('priority').notNull().default(0),
+  titleEn: varchar('title_en', { length: 255 }).notNull(),
+  titleEs: varchar('title_es', { length: 255 }).notNull(),
+  bodyEn: text('body_en').notNull(),
+  bodyEs: text('body_es').notNull(),
+  resourceUrl: varchar('resource_url', { length: 500 }),
+  metadata: jsonb('metadata'),
+  isActive: boolean('is_active').notNull().default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow()
+});
+
+export const userRecommendations = pgTable('user_recommendations', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  responseId: uuid('response_id').notNull().references(() => assessmentResponses.id, { onDelete: 'cascade' }),
+  recommendationId: uuid('recommendation_id').notNull().references(() => recommendations.id, { onDelete: 'cascade' }),
+  isViewed: boolean('is_viewed').notNull().default(false),
+  isDismissed: boolean('is_dismissed').notNull().default(false),
+  viewedAt: timestamp('viewed_at'),
+  createdAt: timestamp('created_at').notNull().defaultNow()
+});
+
+export type Assessment = typeof assessments.$inferSelect;
+export type NewAssessment = typeof assessments.$inferInsert;
+export type AssessmentQuestion = typeof assessmentQuestions.$inferSelect;
+export type NewAssessmentQuestion = typeof assessmentQuestions.$inferInsert;
+export type AssessmentResponse = typeof assessmentResponses.$inferSelect;
+export type NewAssessmentResponse = typeof assessmentResponses.$inferInsert;
+export type Recommendation = typeof recommendations.$inferSelect;
+export type NewRecommendation = typeof recommendations.$inferInsert;
+export type UserRecommendation = typeof userRecommendations.$inferSelect;
+export type NewUserRecommendation = typeof userRecommendations.$inferInsert;

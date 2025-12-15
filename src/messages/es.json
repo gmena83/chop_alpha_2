@@ -142,7 +142,36 @@
     "viewResults": "Ver Resultados",
     "completed": "Completado",
     "inProgress": "En Progreso",
-    "notStarted": "No Iniciado"
+    "notStarted": "No Iniciado",
+    "questionOf": "Pregunta {current} de {total}",
+    "requiredQuestion": "Esta pregunta es obligatoria",
+    "submitAssessment": "Enviar Evaluación",
+    "submitting": "Enviando...",
+    "results": {
+      "title": "Resultados de la Evaluación",
+      "score": "Tu Puntuación",
+      "passed": "¡Felicidades! Aprobaste.",
+      "notPassed": "No aprobaste esta vez. Considera revisar el material.",
+      "recommendations": "Recomendaciones para Ti",
+      "noRecommendations": "Sin recomendaciones específicas en este momento.",
+      "retake": "Repetir Evaluación",
+      "backToModules": "Volver a Módulos"
+    },
+    "questionTypes": {
+      "singleChoice": "Selecciona una opción",
+      "multipleChoice": "Selecciona todas las que apliquen",
+      "likertScale": "Califica tu acuerdo",
+      "textShort": "Ingresa una respuesta corta",
+      "textLong": "Ingresa tu respuesta",
+      "rating": "Califica del 1 al 5"
+    },
+    "likertLabels": {
+      "stronglyDisagree": "Muy en Desacuerdo",
+      "disagree": "En Desacuerdo",
+      "neutral": "Neutral",
+      "agree": "De Acuerdo",
+      "stronglyAgree": "Muy de Acuerdo"
+    }
   },
   "progress": {
     "title": "Tu Progreso",
