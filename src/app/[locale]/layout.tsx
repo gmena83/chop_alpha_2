@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SessionProvider } from "@/components/providers/session-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
-import { AiCoachWidget } from "@/components/ai-coach/chat-widget";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -40,7 +39,6 @@ export default async function LocaleLayout({
               <div className="relative flex min-h-screen flex-col">
                 <main className="flex-1">{children}</main>
               </div>
-              <AiCoachWidget />
             </NextIntlClientProvider>
           </QueryProvider>
         </SessionProvider>
