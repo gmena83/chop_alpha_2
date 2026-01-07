@@ -1,0 +1,64 @@
+Role: You are an expert Front-End Developer specializing in pixel-perfect Figma-to-Code migrations.
+
+Task: Replicate the "CHOP ETA Prototype" Homepage exactly as designed in the provided Figma link and reference PDF.
+
+Core Constraints:
+
+Strict Fidelity: Do NOT take creative liberties. Follow the Figma layout, spacing (padding/margins), typography, and color palette exactly.
+
+No Backend Changes: The backend is already programmed. Focus exclusively on the HTML/CSS and frontend framework logic. Ensure all buttons and links are set up as clean components ready for API integration.
+
+Component Architecture: Build using a modular approach (e.g., Header, Hero, InfoSection, TestimonialSlider, ResearchCard, Footer).
+
+Responsiveness: Ensure the design remains fluid and matches the Figma breakpoints (Desktop, Tablet, Mobile).
+
+Design Specifications to Implement:
+
+Typography: Use the exact font families and weights specified in Figma. Pay close attention to the hierarchy in the "What is Independent Mobility?" and "The Latest Research" sections. 
+
+
+
+
+
+Color Palette: Use the specific shades of green and blue seen in the CHOP branding and the "ETA" logo. 
+
+
+Key Sections to Build:
+
+
+Navigation: Top bar with search/login and main menu (Pedestrian, Driving, Public Transit, etc.). 
+
+
+
+Hero Section: Image of the driver with the "Empowering Transportation among Autistic adolescents" overlay. 
+
+
+Value Props: Three-column layout for "Understand the Benefits," "Find your Mobility Fit," and "Prepare to be Mobile." 
+
+
+
+
+Assessment CTA: The "Are You Ready to Be Independently Mobile?" section with the specific "Take our Assessment" button. 
+
+
+
+Testimonial: The "Stories from People" slider featuring the quote from "Linda, the Parent of an Autistic Driver." 
+
+
+
+Research: The research grid featuring the "Latest Research" cards with CTA buttons. 
+
+
+
+
+Footer: Full site map and legal/copyright info for "The Children's Hospital of Philadelphia." 
+
+
+Technical Stack: [Insert your preferred stack here, e.g., React + Tailwind CSS or Plain HTML/SCSS].
+
+A few tips for a smooth migration:
+Export Assets First: Before running the prompt, I recommend exporting the images (the girl driving, the backpack student, the CHOP logo) from Figma and uploading them to your Replit assets or public folder. Tell the AI the file names so it can link them correctly.
+
+CSS Variables: Ask Replit to define the Figma colors as CSS variables (e.g., --chop-blue, --eta-green) at the start. This makes the code cleaner and easier to maintain.
+
+The "One Section" Trick: If the homepage is too complex for one go, ask Replit to "Build only the Navigation and Hero section first," then check it, then ask it to "Add the Three-Column Benefits section." This prevents the AI from getting overwhelmed and "hallucinating" layout changes.
