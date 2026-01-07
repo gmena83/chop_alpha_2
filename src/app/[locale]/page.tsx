@@ -77,34 +77,23 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Navigation - Matching Figma menu items */}
+          {/* Navigation - Matching Figma menu items exactly */}
           <nav className="hidden lg:flex items-center gap-1">
             <div className="relative group">
               <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Pedestrian
+                What is Independent Mobility?
+              </button>
+            </div>
+            <div className="relative group">
+              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
+                Independent Mobility Options
                 <ChevronDown className="h-4 w-4" />
               </button>
             </div>
             <div className="relative group">
               <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Driving
+                Prepare to be Mobile
                 <ChevronDown className="h-4 w-4" />
-              </button>
-            </div>
-            <div className="relative group">
-              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Public Transit
-                <ChevronDown className="h-4 w-4" />
-              </button>
-            </div>
-            <div className="relative group">
-              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Rideshare
-              </button>
-            </div>
-            <div className="relative group">
-              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Biking
               </button>
             </div>
           </nav>
@@ -156,6 +145,9 @@ export default function HomePage() {
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-white leading-[1.1] mb-6">
+                <span className="block mb-2">
+                  <span style={{ color: 'var(--eta-yellow)' }}>ETA</span>
+                </span>
                 Empowering<br />
                 Transportation<br />
                 among Autistic<br />
@@ -170,7 +162,7 @@ export default function HomePage() {
                 className="text-white px-8 py-3 rounded-full text-base font-medium"
                 style={{ backgroundColor: 'var(--chop-blue)' }}
               >
-                Learn More
+                What is Independent Mobility?
               </Button>
             </div>
           </div>
@@ -475,7 +467,7 @@ export default function HomePage() {
                     className="text-white px-6 py-3 font-medium w-full sm:w-auto"
                     style={{ backgroundColor: 'var(--chop-blue)' }}
                   >
-                    Take our Assessment
+                    Take our Independent Mobility Assessment
                   </Button>
                 </Link>
                 <Link href="/modules">
