@@ -81,24 +81,30 @@ export default function HomePage() {
           <nav className="hidden lg:flex items-center gap-1">
             <div className="relative group">
               <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                What is Independent Mobility?
-              </button>
-            </div>
-            <div className="relative group">
-              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Independent Mobility Options
+                Pedestrian
                 <ChevronDown className="h-4 w-4" />
               </button>
             </div>
             <div className="relative group">
               <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Prepare to be Mobile
+                Driving
                 <ChevronDown className="h-4 w-4" />
               </button>
             </div>
             <div className="relative group">
               <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Driving with Autism
+                Public Transit
+                <ChevronDown className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="relative group">
+              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
+                Rideshare
+              </button>
+            </div>
+            <div className="relative group">
+              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
+                Biking
               </button>
             </div>
           </nav>
@@ -150,9 +156,10 @@ export default function HomePage() {
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-white leading-[1.1] mb-6">
-                Achieve<br />
-                Independent<br />
-                Mobility.
+                Empowering<br />
+                Transportation<br />
+                among Autistic<br />
+                adolescents
               </h1>
               
               <p className="text-white/90 text-lg mb-8 max-w-md leading-relaxed">
@@ -163,7 +170,7 @@ export default function HomePage() {
                 className="text-white px-8 py-3 rounded-full text-base font-medium"
                 style={{ backgroundColor: 'var(--chop-blue)' }}
               >
-                What is Independent Mobility?
+                Learn More
               </Button>
             </div>
           </div>
