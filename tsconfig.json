@@ -36,6 +36,9 @@
       ],
       "@/types/*": [
         "./src/types/*"
+      ],
+      "@assets/*": [
+        "./attached_assets/*"
       ]
     },
     "baseUrl": ".",
