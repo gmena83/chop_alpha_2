@@ -1,0 +1,55 @@
+Step 1: Asset & Style Extraction
+
+Figma API Connection: If you have the capability, please ask me for my Figma Personal Access Token to pull the styles, colors, and layout data directly from the URL provided.
+
+
+Design Tokens: Identify and define the exact color palette (e.g., the specific green and blue branding) and typography (font family, weights, and line heights).
+
+
+Image Assets: Identify all image placeholders from the Figma/PDF, including:
+
+The Hero image of the woman driving.
+
+The "Stories from People" image of the two women.
+
+The student with the backpack.
+
+The CHOP Research Institute logo.
+
+Step 2: Structural Implementation (Strict Fidelity) Construct the Homepage using a modular component structure. Do not change the layout, padding, or sizing. Use the following hierarchy as shown in the design:
+
+
+Header: Navigation for "What is Independent Mobility?", "Independent Mobility Options," and "Prepare to be Mobile".
+
+
+
+Hero Section: Heading: "ETA Empowering Transportation among Autistic adolescents".
+
+
+Three-Column Benefits: "Understand the Benefits" , "Find your Mobility Fit" , and "Prepare to be Mobile".
+
+
+
+
+Assessment CTA: A full-width section asking "Are You Ready to Be Independently Mobile?" with the "Take our Independent Mobility Assessment" button.
+
+
+
+Testimonial Slider: Section titled "Stories from People" featuring the quote: "I think driving helped her have a good sense of independence..." attributed to Linda.
+
+
+
+Research Grid: Title "The Latest Research" with cards for "Independent community mobility..." and "The role for occupational therapists...".
+
+
+
+
+Footer: Complete site map and copyright for "2025 The Children's Hospital of Philadelphia".
+
+Step 3: Development Constraints
+
+Frontend Only: Focus entirely on HTML/CSS and UI components. The backend is already programmed; do not attempt to create new backend logic or modify existing database schemas.
+
+No Creative Liberty: If a specific hover state or transition is not in Figma, use a standard, subtle transition. Do not add decorative elements that are not in the source file.
+
+Responsiveness: Ensure the layout breaks correctly for Mobile, Tablet, and Desktop as defined in the Figma file breakpoints.
