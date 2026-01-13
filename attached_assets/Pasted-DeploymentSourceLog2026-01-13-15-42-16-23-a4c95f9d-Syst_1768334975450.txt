@@ -1,0 +1,239 @@
+DeploymentSourceLog2026-01-13 15:42:16.23
+
+a4c95f9d
+
+System
+
+forwarding local port 5000 to external port 80 (mapped as 1104)
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+^
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+at node:internal/main/run_main_module:36:49 {
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+requireStack: []
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+throw err;
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+}
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+at Function._load (node:internal/modules/cjs/loader:1211:37)
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+Node.js v22.17.0
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+code: 'MODULE_NOT_FOUND',
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+User
+
+at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+2026-01-13 15:42:21.75
+
+a4c95f9d
+
+System
+
+command finished with error [node index.js]: exit status 1
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+Error: Cannot find module '/home/runner/workspace/index.js'
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+at Function._load (node:internal/modules/cjs/loader:1211:37)
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+Node.js v22.17.0
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+^
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+code: 'MODULE_NOT_FOUND',
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+at node:internal/main/run_main_module:36:49 {
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+}
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+node:internal/modules/cjs/loader:1404
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+throw err;
+
+2026-01-13 15:42:28.21
+
+a4c95f9d
+
+User
+
+at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
