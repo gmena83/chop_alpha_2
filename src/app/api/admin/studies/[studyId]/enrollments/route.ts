@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { auth } from '@/lib/auth';
 import { db } from '@/db';
 import { studyEnrollments, studyArms } from '@/db/schema-research';
 import { eq } from 'drizzle-orm';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { studyId: string } }
+  { params }: { params: Promise<{ studyId: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions);
+    const { studyId } = await params;
+    const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -30,7 +30,7 @@ export async function GET(
       })
       .from(studyEnrollments)
       .leftJoin(studyArms, eq(studyEnrollments.armId, studyArms.id))
-      .where(eq(studyEnrollments.studyId, params.studyId));
+      .where(eq(studyEnrollments.studyId, studyId));
 
     return NextResponse.json({ enrollments });
   } catch (error) {

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { auth } from '@/lib/auth';
 import { db } from '@/db';
 import { studyEnrollments, studyArms, randomizationLog, studies } from '@/db/schema-research';
 import { eq, and } from 'drizzle-orm';
@@ -21,10 +20,11 @@ function weightedRandomSelect(arms: { id: string; allocationWeight: number }[]):
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { studyId: string } }
+  { params }: { params: Promise<{ studyId: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions);
+    const { studyId } = await params;
+    const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -36,12 +36,14 @@ export async function POST(
 
     const { enrollmentId } = await request.json();
 
-    const enrollment = await db.query.studyEnrollments.findFirst({
-      where: and(
+    const [enrollment] = await db
+      .select()
+      .from(studyEnrollments)
+      .where(and(
         eq(studyEnrollments.id, enrollmentId),
-        eq(studyEnrollments.studyId, params.studyId)
-      )
-    });
+        eq(studyEnrollments.studyId, studyId)
+      ))
+      .limit(1);
 
     if (!enrollment) {
       return NextResponse.json({ error: 'Enrollment not found' }, { status: 404 });
@@ -51,7 +53,6 @@ export async function POST(
       return NextResponse.json({ error: 'Already randomized' }, { status: 400 });
     }
 
-    // Validate consent/eligibility before randomization
     if (enrollment.status !== 'consented') {
       return NextResponse.json({ 
         error: 'Participant must have consented status before randomization',
@@ -63,7 +64,7 @@ export async function POST(
       .select({ id: studyArms.id, allocationWeight: studyArms.allocationWeight })
       .from(studyArms)
       .where(and(
-        eq(studyArms.studyId, params.studyId),
+        eq(studyArms.studyId, studyId),
         eq(studyArms.isActive, true)
       ));
 
@@ -87,32 +88,40 @@ export async function POST(
 
     await db.insert(randomizationLog).values({
       enrollmentId,
-      studyId: params.studyId,
+      studyId,
       armId: selectedArmId,
       randomizationMethod: 'weighted_random',
       seed,
       performedBy: session.user.id
     });
 
+    const [currentArm] = await db
+      .select({ currentParticipants: studyArms.currentParticipants })
+      .from(studyArms)
+      .where(eq(studyArms.id, selectedArmId))
+      .limit(1);
+
     await db
       .update(studyArms)
       .set({
-        currentParticipants: (await db.query.studyArms.findFirst({
-          where: eq(studyArms.id, selectedArmId)
-        }))!.currentParticipants + 1,
+        currentParticipants: (currentArm?.currentParticipants || 0) + 1,
         updatedAt: new Date()
       })
       .where(eq(studyArms.id, selectedArmId));
 
+    const [currentStudy] = await db
+      .select({ currentEnrollment: studies.currentEnrollment })
+      .from(studies)
+      .where(eq(studies.id, studyId))
+      .limit(1);
+
     await db
       .update(studies)
       .set({
-        currentEnrollment: (await db.query.studies.findFirst({
-          where: eq(studies.id, params.studyId)
-        }))!.currentEnrollment + 1,
+        currentEnrollment: (currentStudy?.currentEnrollment || 0) + 1,
         updatedAt: new Date()
       })
-      .where(eq(studies.id, params.studyId));
+      .where(eq(studies.id, studyId));
 
     return NextResponse.json({ 
       success: true,

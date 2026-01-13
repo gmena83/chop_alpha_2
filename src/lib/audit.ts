@@ -25,6 +25,7 @@ export type AuditAction =
   | 'admin.user_deleted'
   | 'admin.content_updated'
   | 'admin.data_exported'
+  | 'ai_coach_query'
   | 'system.error';
 
 export type AuditTargetType =
@@ -34,7 +35,8 @@ export type AuditTargetType =
   | 'step'
   | 'assessment'
   | 'content'
-  | 'system';
+  | 'system'
+  | 'ai_conversation';
 
 interface AuditLogParams {
   actorUserId?: string | null;

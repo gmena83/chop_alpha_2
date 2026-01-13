@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { auth } from '@/lib/auth';
 import { db } from '@/db';
 import { users, userProgress, assessmentResponses, progressEvents, families, userMilestones, modules, steps, assessments } from '@/db/schema';
 import { desc, eq } from 'drizzle-orm';
@@ -137,7 +136,7 @@ async function exportFamilies() {
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
     
     if (!session?.user || !['admin', 'super_admin', 'research_staff'].includes(session.user.role)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -182,8 +181,8 @@ export async function GET(request: NextRequest) {
 
     await logAuditEvent({
       actorUserId: session.user.id,
-      action: 'data_export',
-      targetType: type,
+      action: 'admin.data_exported',
+      targetType: 'system',
       metadata: {
         exportType: type,
         recordCount: data.length,

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { auth } from '@/lib/auth';
 import { db } from '@/db';
 import { coachingSessions, coachAssignments } from '@/db/schema-telecoaching';
 import { families, users } from '@/db/schema';
@@ -8,7 +7,7 @@ import { eq, and, or, desc } from 'drizzle-orm';
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -49,7 +48,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -67,12 +66,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Family not found' }, { status: 404 });
     }
 
-    const assignment = await db.query.coachAssignments.findFirst({
-      where: and(
+    const [assignment] = await db
+      .select()
+      .from(coachAssignments)
+      .where(and(
         eq(coachAssignments.familyId, family.id),
         eq(coachAssignments.isActive, true)
-      )
-    });
+      ))
+      .limit(1);
 
     if (!assignment) {
       return NextResponse.json({ 
