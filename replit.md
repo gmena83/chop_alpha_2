@@ -78,7 +78,7 @@ Preferred communication style: Simple, everyday language.
 11. User management and content editing
 12. Analytics dashboard and CSV exports
 
-### LMS Learner Interface (New)
+### LMS Learner Interface
 - **Learner Dashboard** (`/[locale]/dashboard`): Shows enrolled modules, progress stats, earned milestones
 - **Module Viewer** (`/[locale]/modules/[moduleId]`): Step-by-step lesson viewer with sidebar navigation
 - **Reusable Components** (`src/components/lms/`):
@@ -87,6 +87,21 @@ Preferred communication style: Simple, everyday language.
   - StepNavigation: Step sidebar with completion tracking
   - VideoPlayer: YouTube/Vimeo/direct video embed support
   - StepContent: Unified content renderer for all step types
+
+### Staff Portal (New)
+- **Staff Dashboard** (`/[locale]/staff`): Overview stats, quick actions, system status
+- **Module Management** (`/[locale]/staff/modules`): 
+  - Create, edit, and organize learning modules
+  - Manage steps with video URLs, markdown content, and checklists
+  - Toggle module/step active status
+  - Bilingual content support (English/Spanish)
+- **User Management** (`/[locale]/staff/users`):
+  - View all users with pagination and filtering
+  - Create new user accounts with role assignment
+  - Edit user details and role permissions
+  - Role-based access (admin, super_admin, research_staff)
+- **Settings** (`/[locale]/staff/settings`): Account info, database status, localization
+- **Access Control**: Only accessible to admin, super_admin, and research_staff roles
 
 ### Learning Paths Schema
 - `learning_paths`: Programs grouping multiple modules
