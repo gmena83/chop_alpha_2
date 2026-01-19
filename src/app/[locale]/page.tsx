@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { 
   Search, 
@@ -12,7 +14,8 @@ import {
   Car,
   Bus,
   Bike,
-  Train
+  Train,
+  LayoutDashboard
 } from "lucide-react";
 
 const heroImage = "/images/young_woman_driving__394b7a25.jpg";
@@ -80,41 +83,37 @@ export default function HomePage() {
 
           {/* Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
-            <div className="relative group">
-              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                What is Independent Mobility?
-              </button>
-            </div>
-            <div className="relative group">
-              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Independent Mobility Options
-                <ChevronDown className="h-4 w-4" />
-              </button>
-            </div>
-            <div className="relative group">
-              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Prepare to be Mobile
-                <ChevronDown className="h-4 w-4" />
-              </button>
-            </div>
-            <div className="relative group">
-              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-                Driving with Autism
-                <ChevronDown className="h-4 w-4" />
-              </button>
-            </div>
+            <a href="#about" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
+              What is Independent Mobility?
+            </a>
+            <a href="#options" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
+              Independent Mobility Options
+              <ChevronDown className="h-4 w-4" />
+            </a>
+            <a href="#prepare" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
+              Prepare to be Mobile
+              <ChevronDown className="h-4 w-4" />
+            </a>
+            <a href="#driving" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
+              Driving with Autism
+              <ChevronDown className="h-4 w-4" />
+            </a>
           </nav>
 
-          {/* Search and Login */}
+          {/* Search and Login/Dashboard */}
           <div className="flex items-center gap-4">
             <button className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
               <Search className="h-4 w-4" />
               <span className="hidden sm:inline">Search</span>
             </button>
-            <a href="/en/auth/login" className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
+            <Link href="/en/dashboard" className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
+              <LayoutDashboard className="h-4 w-4" />
+              <span className="hidden sm:inline">Dashboard</span>
+            </Link>
+            <Link href="/en/auth/login" className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
               <User className="h-4 w-4" />
               <span className="hidden sm:inline">Login</span>
-            </a>
+            </Link>
           </div>
         </div>
       </header>
@@ -277,7 +276,7 @@ export default function HomePage() {
         </section>
 
         {/* Stories from People Section */}
-        <section className="py-16 md:py-20 bg-[#1a5276]">
+        <section id="about" className="py-16 md:py-20 bg-[#1a5276]">
           <div className="max-w-[1400px] mx-auto px-4 md:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
               Stories from People
