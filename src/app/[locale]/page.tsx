@@ -114,6 +114,9 @@ export default function HomePage() {
               <User className="h-4 w-4" />
               <span className="hidden sm:inline">Login</span>
             </Link>
+            <Link href="/en/staff" className="flex items-center gap-1 text-sm bg-[#f4d03f] text-[#5b2c6f] px-3 py-1 rounded-md font-medium hover:bg-[#f4d03f]/90 transition-colors">
+              <span>Staff Portal</span>
+            </Link>
           </div>
         </div>
       </header>
