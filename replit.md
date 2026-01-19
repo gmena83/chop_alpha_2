@@ -62,7 +62,9 @@ Preferred communication style: Simple, everyday language.
 | Monitoring | Sentry | Error reporting and tracking |
 | Tracing | OpenTelemetry | Distributed tracing |
 
-**Note:** The platform MVP is fully implemented with all 12 core features complete:
+**Note:** The platform MVP is fully implemented with all core features complete:
+
+### Core Features (12)
 1. Next.js with TypeScript, Tailwind CSS, shadcn/ui
 2. PostgreSQL with Drizzle ORM
 3. Bilingual framework (English/Spanish) with next-intl
@@ -75,3 +77,18 @@ Preferred communication style: Simple, everyday language.
 10. Admin console with navigation
 11. User management and content editing
 12. Analytics dashboard and CSV exports
+
+### LMS Learner Interface (New)
+- **Learner Dashboard** (`/[locale]/dashboard`): Shows enrolled modules, progress stats, earned milestones
+- **Module Viewer** (`/[locale]/modules/[moduleId]`): Step-by-step lesson viewer with sidebar navigation
+- **Reusable Components** (`src/components/lms/`):
+  - ProgressCard: Module cards with progress bars and status
+  - MilestoneCard: Achievement badges with points
+  - StepNavigation: Step sidebar with completion tracking
+  - VideoPlayer: YouTube/Vimeo/direct video embed support
+  - StepContent: Unified content renderer for all step types
+
+### Learning Paths Schema
+- `learning_paths`: Programs grouping multiple modules
+- `learning_path_modules`: Module ordering with prerequisites
+- `user_learning_paths`: User enrollment and progress tracking
