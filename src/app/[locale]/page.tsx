@@ -97,6 +97,12 @@ export default function HomePage() {
                 <ChevronDown className="h-4 w-4" />
               </button>
             </div>
+            <div className="relative group">
+              <button className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
+                Driving with Autism
+                <ChevronDown className="h-4 w-4" />
+              </button>
+            </div>
           </nav>
 
           {/* Search and Login */}
@@ -146,11 +152,8 @@ export default function HomePage() {
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-white leading-[1.1] mb-6">
-                <span className="block mb-2 text-[#f4d03f]">ETA</span>
-                Empowering<br />
-                Transportation<br />
-                among Autistic<br />
-                adolescents
+                Achieve<br />
+                Independent Mobility.
               </h1>
               
               <p className="text-white/90 text-lg mb-8 max-w-md leading-relaxed">
@@ -277,7 +280,7 @@ export default function HomePage() {
         <section className="py-16 md:py-20 bg-[#1a5276]">
           <div className="max-w-[1400px] mx-auto px-4 md:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
-              Stories from People Like You
+              Stories from People
             </h2>
 
             <div className="relative">
@@ -349,8 +352,8 @@ export default function HomePage() {
               Check out some of the latest research on independent mobility.
             </p>
 
-            {/* Research Cards */}
-            <div className="grid md:grid-cols-3 gap-8 mb-10">
+            {/* Research Cards - 2 columns per Figma */}
+            <div className="grid md:grid-cols-2 gap-8 mb-10 max-w-3xl">
               <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                 <div className="aspect-video overflow-hidden">
                   <img 
@@ -360,11 +363,11 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold mb-4 line-clamp-3 text-[#1a5276]">
+                  <h3 className="text-base font-semibold mb-4 line-clamp-3 text-[#1a5276]">
                     Independent community mobility and driving experiences of adults on the autism spectrum: A scoping review
                   </h3>
                   <Button className="text-white text-sm px-5 py-2 bg-[#1a5276] hover:bg-[#154360]">
-                    Read More
+                    CTA
                   </Button>
                 </div>
               </div>
@@ -378,29 +381,11 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold mb-4 line-clamp-3 text-[#1a5276]">
+                  <h3 className="text-base font-semibold mb-4 line-clamp-3 text-[#1a5276]">
                     The role for occupational therapists in community mobility training for people with autism spectrum disorders
                   </h3>
                   <Button className="text-white text-sm px-5 py-2 bg-[#1a5276] hover:bg-[#154360]">
-                    Read More
-                  </Button>
-                </div>
-              </div>
-
-              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <div className="aspect-video overflow-hidden bg-gray-100">
-                  <img 
-                    src={walkingImage} 
-                    alt="Research study" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold mb-4 line-clamp-3 text-[#1a5276]">
-                    Promoting pedestrian safety and independent mobility in autism spectrum disorder
-                  </h3>
-                  <Button className="text-white text-sm px-5 py-2 bg-[#1a5276] hover:bg-[#154360]">
-                    Read More
+                    CTA
                   </Button>
                 </div>
               </div>
@@ -456,99 +441,96 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CHOP Research Institute Pre-Footer */}
-        <section className="py-12 bg-[#f5f5f5]">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-[#1a5276] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">CHOP</span>
-              </div>
-              <div>
-                <p className="font-semibold text-[#1a5276]">CHOP Research Institute</p>
-                <p className="text-gray-600 text-sm">Leading pediatric research innovation</p>
-              </div>
-            </div>
-            <Button className="text-white bg-[#1a5276] hover:bg-[#154360]">
-              Learn More About Our Research
-            </Button>
-          </div>
-        </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[#1a5276] text-white py-12">
+      {/* Footer - CHOP Research Institute Section */}
+      <footer className="bg-[#f5f5f0] pt-16 pb-8">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-          {/* Footer Links Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12">
+          {/* CHOP Research Institute Header */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-12 pb-12 border-b border-gray-300">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center">
+                <div className="w-12 h-14 flex items-center justify-center">
+                  <svg viewBox="0 0 40 48" className="w-10 h-12" fill="none">
+                    <path d="M20 0C8.954 0 0 8.954 0 20v8c0 11.046 8.954 20 20 20s20-8.954 20-20v-8C40 8.954 31.046 0 20 0z" fill="#1a5276"/>
+                    <text x="20" y="30" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CH</text>
+                  </svg>
+                </div>
+                <div className="ml-2">
+                  <p className="text-lg font-bold text-[#1a5276]">Children's Hospital</p>
+                  <p className="text-lg font-bold text-[#1a5276]">of Philadelphia</p>
+                  <p className="text-sm font-medium text-[#17a589]">RESEARCH INSTITUTE</p>
+                </div>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-gray-700">3401 Civic Center Blvd.</p>
+              <p className="text-gray-700">Philadelphia, PA 19104</p>
+            </div>
+          </div>
+
+          {/* Footer Links - 4 columns per Figma */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             <div>
-              <h3 className="font-semibold mb-4 text-[#f4d03f]">About ETA</h3>
-              <ul className="space-y-2 text-sm text-white/80">
-                <li><a href="#" className="hover:text-white transition-colors">Our Mission</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Our Team</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Research Partners</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
+              <h3 className="font-semibold mb-4 text-[#1a5276]">What is Independent Mobility?</h3>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4 text-[#1a5276]">Independent Mobility Options</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Pedestrian</a></li>
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Biking</a></li>
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Driving</a></li>
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Public Transit</a></li>
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Rideshare</a></li>
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Explore all Options</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-[#f4d03f]">Mobility Options</h3>
-              <ul className="space-y-2 text-sm text-white/80">
-                <li><a href="#" className="hover:text-white transition-colors">Pedestrian</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Driving</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Public Transit</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Rideshare</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Biking</a></li>
+              <h3 className="font-semibold mb-4 text-[#1a5276]">Prepare to be Mobile</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">How to Prepare</a></li>
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Build Mobility Skills</a></li>
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Resources and Support</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-[#f4d03f]">Resources</h3>
-              <ul className="space-y-2 text-sm text-white/80">
-                <li><a href="#" className="hover:text-white transition-colors">Assessments</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Training Modules</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Video Library</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">FAQs</a></li>
+              <h3 className="font-semibold mb-4 text-[#1a5276]">Driving with Autism</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Prepare to Drive</a></li>
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors flex items-center gap-2">Driving Lessons <span className="text-[#7cb342]">●</span></a></li>
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Driving Resource Library</a></li>
+                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Frequently Asked Questions</a></li>
               </ul>
             </div>
-            <div>
-              <h3 className="font-semibold mb-4 text-[#f4d03f]">Research</h3>
-              <ul className="space-y-2 text-sm text-white/80">
-                <li><a href="#" className="hover:text-white transition-colors">Publications</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Current Studies</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Participate</a></li>
-              </ul>
+          </div>
+
+          {/* Award Badges */}
+          <div className="flex items-center gap-6 mb-8">
+            <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500 font-semibold">
+              BEST
             </div>
-            <div>
-              <h3 className="font-semibold mb-4 text-[#f4d03f]">For Families</h3>
-              <ul className="space-y-2 text-sm text-white/80">
-                <li><a href="#" className="hover:text-white transition-colors">Getting Started</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Parent Resources</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Teen Resources</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Success Stories</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4 text-[#f4d03f]">Legal</h3>
-              <ul className="space-y-2 text-sm text-white/80">
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Use</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Accessibility</a></li>
-              </ul>
+            <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500 font-semibold">
+              MAGNET
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl font-bold text-[#f4d03f]">ET</span>
-              <span className="text-2xl font-bold text-[#f4d03f]">
-                <svg viewBox="0 0 24 24" className="h-5 w-5 inline mx-[-2px]" fill="currentColor">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-                A
-              </span>
-              <span className="text-sm text-white/60 ml-2">| A CHOP Research Initiative</span>
+          <div className="border-t border-gray-300 pt-6">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 mb-4">
+              <a href="#" className="hover:text-[#1a5276] transition-colors">About Us</a>
+              <span>|</span>
+              <a href="#" className="hover:text-[#1a5276] transition-colors">Contact Us</a>
+              <span>|</span>
+              <a href="#" className="hover:text-[#1a5276] transition-colors">Privacy Policy</a>
+              <span>|</span>
+              <a href="#" className="hover:text-[#1a5276] transition-colors">Terms of Use</a>
+              <span>|</span>
+              <a href="#" className="hover:text-[#1a5276] transition-colors">Ethics & Compliance</a>
+              <span>|</span>
+              <a href="#" className="hover:text-[#1a5276] transition-colors">HIPAA Notice of Privacy Practices</a>
             </div>
-            <p className="text-sm text-white/60">
-              © 2025 The Children's Hospital of Philadelphia. All rights reserved.
+            <p className="text-sm text-gray-500">
+              ©2025 The Children's Hospital of Philadelphia. Children's Hospital of Philadelphia is a charitable 501(c)(3) nonprofit organization.
             </p>
           </div>
         </div>
