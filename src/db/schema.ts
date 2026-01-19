@@ -343,3 +343,47 @@ export type UserMilestone = typeof userMilestones.$inferSelect;
 export type NewUserMilestone = typeof userMilestones.$inferInsert;
 export type ProgressEvent = typeof progressEvents.$inferSelect;
 export type NewProgressEvent = typeof progressEvents.$inferInsert;
+
+export const learningPaths = pgTable('learning_paths', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  slug: varchar('slug', { length: 100 }).notNull().unique(),
+  titleEn: varchar('title_en', { length: 255 }).notNull(),
+  titleEs: varchar('title_es', { length: 255 }).notNull(),
+  descriptionEn: text('description_en'),
+  descriptionEs: text('description_es'),
+  imageUrl: varchar('image_url', { length: 500 }),
+  orderIndex: integer('order_index').notNull().default(0),
+  estimatedWeeks: integer('estimated_weeks'),
+  isActive: boolean('is_active').notNull().default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow()
+});
+
+export const learningPathModules = pgTable('learning_path_modules', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  learningPathId: uuid('learning_path_id').notNull().references(() => learningPaths.id, { onDelete: 'cascade' }),
+  moduleId: uuid('module_id').notNull().references(() => modules.id, { onDelete: 'cascade' }),
+  orderIndex: integer('order_index').notNull().default(0),
+  isRequired: boolean('is_required').notNull().default(true),
+  prerequisiteModuleId: uuid('prerequisite_module_id').references(() => modules.id, { onDelete: 'set null' }),
+  createdAt: timestamp('created_at').notNull().defaultNow()
+});
+
+export const userLearningPaths = pgTable('user_learning_paths', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  learningPathId: uuid('learning_path_id').notNull().references(() => learningPaths.id, { onDelete: 'cascade' }),
+  status: varchar('status', { length: 50 }).notNull().default('not_started'),
+  enrolledAt: timestamp('enrolled_at').notNull().defaultNow(),
+  startedAt: timestamp('started_at'),
+  completedAt: timestamp('completed_at'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow()
+});
+
+export type LearningPath = typeof learningPaths.$inferSelect;
+export type NewLearningPath = typeof learningPaths.$inferInsert;
+export type LearningPathModule = typeof learningPathModules.$inferSelect;
+export type NewLearningPathModule = typeof learningPathModules.$inferInsert;
+export type UserLearningPath = typeof userLearningPaths.$inferSelect;
+export type NewUserLearningPath = typeof userLearningPaths.$inferInsert;
