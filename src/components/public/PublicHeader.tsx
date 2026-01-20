@@ -24,6 +24,7 @@ export default function PublicHeader() {
     { label: 'Driving', href: `/${locale}/mobility/driving` },
     { label: 'Public Transit', href: `/${locale}/mobility/public-transit` },
     { label: 'Rideshare', href: `/${locale}/mobility/rideshare` },
+    { label: 'Explore all Options', href: `/${locale}/mobility` },
   ];
 
   const prepareOptions = [
