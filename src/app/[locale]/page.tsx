@@ -18,7 +18,7 @@ import {
   LayoutDashboard
 } from "lucide-react";
 
-const heroImage = "/images/young_woman_driving__394b7a25.jpg";
+const heroImage = "/images/hero-driver.jpg";
 const walkingImage = "/images/person_walking_on_si_cd47e8a3.jpg";
 const busImage = "/images/public_transit_bus_c_2c9db796.jpg";
 const wheelchairImage = "/images/wheelchair_user_inde_eba74f9d.jpg";
@@ -125,51 +125,70 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative min-h-[520px] overflow-hidden">
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a5276] via-[#2e86ab] to-[#17a589]" />
+        <section className="relative min-h-[480px] overflow-hidden">
+          {/* Green background */}
+          <div className="absolute inset-0 bg-[#7B8C2A]" />
           
-          {/* Hero image on right side */}
-          <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block">
+          {/* Hero image on right side with diagonal cut */}
+          <div className="absolute right-0 top-0 bottom-0 w-[55%] hidden lg:block overflow-hidden">
             <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${heroImage})` }}
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: 'right center' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#2e86ab] via-transparent to-transparent" />
+            {/* Diagonal overlay from green side */}
+            <svg 
+              className="absolute left-0 top-0 h-full w-48" 
+              viewBox="0 0 100 100" 
+              preserveAspectRatio="none"
+            >
+              <polygon points="0,0 100,0 0,100" fill="#7B8C2A" />
+            </svg>
           </div>
 
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative py-16 md:py-24">
-            <div className="max-w-xl">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative py-12 md:py-16">
+            <div className="max-w-lg">
               {/* Transportation Icons Row */}
-              <div className="flex items-center gap-6 mb-8">
-                <Footprints className="h-7 w-7 text-white/80" />
-                <div className="w-7 h-7 text-white/80 flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-full h-full">
-                    <circle cx="12" cy="5" r="3"/>
-                    <path d="M12 8v8M8 12h8"/>
-                  </svg>
-                </div>
-                <Car className="h-7 w-7 text-white/80" />
-                <Bus className="h-7 w-7 text-white/80" />
-                <Train className="h-7 w-7 text-white/80" />
-                <Bike className="h-7 w-7 text-white/80" />
+              <div className="flex items-center gap-5 mb-8">
+                {/* Walking person */}
+                <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="4" r="2"/>
+                  <path d="M15.89 8.11C15.5 7.72 14.83 7 13.53 7c-.21 0-1.42 0-2.54 0-.72 0-1.42.3-1.93.81L6.8 10.08c-.39.39-.39 1.03 0 1.42.39.39 1.01.39 1.41 0L10 9.71V22h2v-6h2v6h2V9.17l3.35 3.35c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-4.87-3z"/>
+                </svg>
+                {/* Scooter/kick scooter */}
+                <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M7.5 18A2.5 2.5 0 0 1 5 15.5A2.5 2.5 0 0 1 7.5 13A2.5 2.5 0 0 1 10 15.5A2.5 2.5 0 0 1 7.5 18M10.5 9H11V4.5A.5.5 0 0 1 11.5 4H13V9H14.5L18 15.5A2.5 2.5 0 0 1 16.5 18A2.5 2.5 0 0 1 14 15.5C14 14.74 14.27 14.05 14.71 13.5L13 10.77V16H9V10.77L10.5 9Z"/>
+                </svg>
+                {/* Bicycle */}
+                <Bike className="h-8 w-8 text-white" />
+                {/* Car */}
+                <Car className="h-8 w-8 text-white" />
+                {/* Bus */}
+                <Bus className="h-8 w-8 text-white" />
+                {/* Van/minibus */}
+                <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 10H6V5H18M18.5 15A1.5 1.5 0 0 1 17 13.5A1.5 1.5 0 0 1 18.5 12A1.5 1.5 0 0 1 20 13.5A1.5 1.5 0 0 1 18.5 15M5.5 15A1.5 1.5 0 0 1 4 13.5A1.5 1.5 0 0 1 5.5 12A1.5 1.5 0 0 1 7 13.5A1.5 1.5 0 0 1 5.5 15M21 5H19V4C19 2.89 18.11 2 17 2H7C5.89 2 5 2.89 5 4V5H3C2.45 5 2 5.45 2 6V8C2 8.55 2.45 9 3 9H5V11H3C2.45 11 2 11.45 2 12V18C2 18.55 2.45 19 3 19H5V20C5 20.55 5.45 21 6 21H7C7.55 21 8 20.55 8 20V19H16V20C16 20.55 16.45 21 17 21H18C18.55 21 19 20.55 19 20V19H21C21.55 19 22 18.55 22 18V6C22 5.45 21.55 5 21 5Z"/>
+                </svg>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-white leading-[1.1] mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-[52px] font-bold text-white leading-[1.15] mb-10">
                 Achieve<br />
                 Independent Mobility.
               </h1>
-              
-              <p className="text-white/90 text-lg mb-8 max-w-md leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget luctus est, ut blandit dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
 
               <Button 
-                className="text-white px-8 py-3 rounded-full text-base font-medium bg-[#1a5276] hover:bg-[#154360]"
+                variant="outline"
+                className="text-white px-6 py-3 rounded-sm text-sm font-medium bg-transparent border-2 border-white hover:bg-white hover:text-[#7B8C2A] transition-colors"
               >
                 What is Independent Mobility?
               </Button>
             </div>
+          </div>
+
+          {/* Carousel dots indicator */}
+          <div className="absolute bottom-6 right-8 hidden lg:flex items-center gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-white"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-white/40"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-white/40"></div>
           </div>
         </section>
 
