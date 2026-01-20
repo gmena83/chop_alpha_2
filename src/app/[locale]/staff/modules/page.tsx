@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -219,8 +219,8 @@ export default function ModulesPage() {
                     </TableHeader>
                     <TableBody>
                       {phaseModules.map((module) => (
-                        <>
-                          <TableRow key={module.id}>
+                        <React.Fragment key={module.id}>
+                          <TableRow>
                             <TableCell>
                               <button
                                 onClick={() => toggleModuleExpand(module.id)}
@@ -341,7 +341,7 @@ export default function ModulesPage() {
                                 </TableCell>
                               </TableRow>
                             )}
-                        </>
+                        </React.Fragment>
                       ))}
                     </TableBody>
                   </Table>
