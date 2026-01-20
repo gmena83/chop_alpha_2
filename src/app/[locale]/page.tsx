@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { 
@@ -31,6 +32,8 @@ export default function HomePage() {
   const pathname = usePathname();
   const locale = pathname.split('/')[1] || 'en';
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const { data: session } = useSession();
+  const isLoggedIn = !!session?.user;
 
   const testimonials = [
     {
@@ -108,16 +111,19 @@ export default function HomePage() {
               <Search className="h-4 w-4" />
               <span className="hidden sm:inline">Search</span>
             </button>
-            <Link href={`/${locale}/dashboard`} className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
-              <LayoutDashboard className="h-4 w-4" />
-              <span className="hidden sm:inline">Dashboard</span>
-            </Link>
-            <Link href={`/${locale}/auth/login`} className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
-              <User className="h-4 w-4" />
-              <span className="hidden sm:inline">Login</span>
-            </Link>
-            <Link href={`/${locale}/staff`} className="flex items-center gap-1 text-sm bg-[#f4d03f] text-[#5b2c6f] px-3 py-1 rounded-md font-medium hover:bg-[#f4d03f]/90 transition-colors">
-              <span>Staff Portal</span>
+            {isLoggedIn ? (
+              <Link href={`/${locale}/dashboard`} className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
+                <LayoutDashboard className="h-4 w-4" />
+                <span className="hidden sm:inline">Dashboard</span>
+              </Link>
+            ) : (
+              <Link href={`/${locale}/auth/login`} className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
+                <User className="h-4 w-4" />
+                <span className="hidden sm:inline">Login</span>
+              </Link>
+            )}
+            <Link href={`/${locale}/staff`} className="text-xs text-white/60 hover:text-white/80 transition-colors">
+              Staff
             </Link>
           </div>
         </div>
