@@ -7,22 +7,19 @@ import {
   ChevronLeft,
   ChevronRight,
   Footprints,
-  Car,
-  Bus,
+  Plane,
   Bike,
-  Train
+  Bus,
+  Train,
+  Car
 } from "lucide-react";
 import PublicHeader from "@/components/public/PublicHeader";
 import PublicFooter from "@/components/public/PublicFooter";
 
-const heroImage = "/images/hero-driver.jpg";
-const walkingImage = "/images/person_walking_on_si_cd47e8a3.jpg";
-const busImage = "/images/public_transit_bus_c_2c9db796.jpg";
-const wheelchairImage = "/images/wheelchair_user_inde_eba74f9d.jpg";
+const heroImage = "/images/public_transit_bus_c_2c9db796.jpg";
 const motherDaughterImage = "/images/mother_and_teenage_d_cdeb60a5.jpg";
 const teenBackpackImage = "/images/teenage_girl_student_936ca063.jpg";
-const therapistImage1 = "/images/occupational_therapi_ca8af19f.jpg";
-const therapistImage2 = "/images/occupational_therapi_c4615718.jpg";
+const mobilityIllustration = "/images/wheelchair_user_inde_eba74f9d.jpg";
 
 export default function HomePage() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -58,241 +55,169 @@ export default function HomePage() {
       <PublicHeader />
 
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative min-h-[480px] overflow-hidden">
-          {/* Green background */}
-          <div className="absolute inset-0 bg-[#7B8C2A]" />
+        {/* Hero Section - Blue with diagonal */}
+        <section className="relative min-h-[420px] overflow-hidden">
+          <div className="absolute inset-0 bg-[#1a5276]" />
           
-          {/* Hero image on right side with diagonal cut */}
           <div className="absolute right-0 top-0 bottom-0 w-[55%] hidden lg:block overflow-hidden">
             <div 
-              className="absolute inset-0 bg-cover bg-no-repeat"
-              style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: '100% 50%', backgroundSize: 'auto 150%' }}
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${heroImage})` }}
             />
-            {/* Diagonal overlay from green side */}
             <svg 
               className="absolute left-0 top-0 h-full w-48" 
               viewBox="0 0 100 100" 
               preserveAspectRatio="none"
             >
-              <polygon points="0,0 100,0 0,100" fill="#7B8C2A" />
+              <polygon points="0,0 100,0 0,100" fill="#1a5276" />
             </svg>
           </div>
 
           <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative py-12 md:py-16">
             <div className="max-w-lg">
-              {/* Transportation Icons Row */}
-              <div className="flex items-center gap-5 mb-8">
-                {/* Walking person */}
-                <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <circle cx="12" cy="4" r="2"/>
-                  <path d="M15.89 8.11C15.5 7.72 14.83 7 13.53 7c-.21 0-1.42 0-2.54 0-.72 0-1.42.3-1.93.81L6.8 10.08c-.39.39-.39 1.03 0 1.42.39.39 1.01.39 1.41 0L10 9.71V22h2v-6h2v6h2V9.17l3.35 3.35c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-4.87-3z"/>
-                </svg>
-                {/* Scooter/kick scooter */}
-                <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M7.5 18A2.5 2.5 0 0 1 5 15.5A2.5 2.5 0 0 1 7.5 13A2.5 2.5 0 0 1 10 15.5A2.5 2.5 0 0 1 7.5 18M10.5 9H11V4.5A.5.5 0 0 1 11.5 4H13V9H14.5L18 15.5A2.5 2.5 0 0 1 16.5 18A2.5 2.5 0 0 1 14 15.5C14 14.74 14.27 14.05 14.71 13.5L13 10.77V16H9V10.77L10.5 9Z"/>
-                </svg>
-                {/* Bicycle */}
-                <Bike className="h-8 w-8 text-white" />
-                {/* Car */}
-                <Car className="h-8 w-8 text-white" />
-                {/* Bus */}
-                <Bus className="h-8 w-8 text-white" />
-                {/* Van/minibus */}
-                <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18 10H6V5H18M18.5 15A1.5 1.5 0 0 1 17 13.5A1.5 1.5 0 0 1 18.5 12A1.5 1.5 0 0 1 20 13.5A1.5 1.5 0 0 1 18.5 15M5.5 15A1.5 1.5 0 0 1 4 13.5A1.5 1.5 0 0 1 5.5 12A1.5 1.5 0 0 1 7 13.5A1.5 1.5 0 0 1 5.5 15M21 5H19V4C19 2.89 18.11 2 17 2H7C5.89 2 5 2.89 5 4V5H3C2.45 5 2 5.45 2 6V8C2 8.55 2.45 9 3 9H5V11H3C2.45 11 2 11.45 2 12V18C2 18.55 2.45 19 3 19H5V20C5 20.55 5.45 21 6 21H7C7.55 21 8 20.55 8 20V19H16V20C16 20.55 16.45 21 17 21H18C18.55 21 19 20.55 19 20V19H21C21.55 19 22 18.55 22 18V6C22 5.45 21.55 5 21 5Z"/>
-                </svg>
+              <div className="flex items-center gap-4 mb-8">
+                <Footprints className="h-6 w-6 text-white" />
+                <Plane className="h-6 w-6 text-white" />
+                <Bike className="h-6 w-6 text-white" />
+                <Bus className="h-6 w-6 text-white" />
+                <Train className="h-6 w-6 text-white" />
+                <Car className="h-6 w-6 text-white" />
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-[52px] font-bold text-white leading-[1.15] mb-10">
-                Achieve<br />
-                Independent Mobility.
+              <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-8">
+                Independent<br />Mobility
               </h1>
 
-              <Button 
-                variant="outline"
-                className="text-white px-6 py-3 rounded-sm text-sm font-medium bg-transparent border-2 border-white hover:bg-white hover:text-[#7B8C2A] transition-colors"
-                onClick={() => document.getElementById('mobility-info')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                What is Independent Mobility?
+              <Button className="bg-[#f4d03f] text-[#1a5276] px-6 py-3 font-medium hover:bg-[#f1c40f] border-2 border-[#1a5276]">
+                Take Our Independent Mobility Assessment
               </Button>
             </div>
           </div>
-
-          {/* Carousel dots indicator */}
-          <div className="absolute bottom-6 right-8 hidden lg:flex items-center gap-2">
-            <div className="w-2.5 h-2.5 rounded-full bg-white"></div>
-            <div className="w-2.5 h-2.5 rounded-full bg-white/40"></div>
-            <div className="w-2.5 h-2.5 rounded-full bg-white/40"></div>
-          </div>
         </section>
 
-        {/* Mobility Provides Independence Section */}
-        <section id="mobility-info" className="py-16 md:py-20 bg-white">
+        {/* What is Independent Mobility Section */}
+        <section className="py-16 md:py-20 bg-white">
           <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276]">
-              Mobility Provides Independence
-            </h2>
-            <p className="text-gray-600 max-w-4xl mb-12 text-lg leading-relaxed">
-              Gaining independent mobility is a key milestone in achieving a greater sense of autonomy and freedom. It allows individuals to take charge of their daily routines, explore new places, and participate in various activities without transportation assistance. This newfound independence builds self-esteem, enhances decision-making skills, and fosters a sense of empowerment, opening doors to a world of possibilities.
-            </p>
-
-            {/* Three Images Grid */}
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-                <img 
-                  src={walkingImage} 
-                  alt="Person walking independently" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
+            <div className="grid md:grid-cols-2 gap-12 items-start">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276]">
+                  What is Independent Mobility?
+                </h2>
+                <p className="text-gray-700 leading-relaxed text-lg">
+                  Independent mobility is being able to get around your community without help. Mobility options include walking, riding a bicycle or e-scooter, using a bus or train, calling a taxi or rideshare, and driving a personal vehicle and more. Developing the skills to use these options by yourself safely can take some time but it will greatly improve your quality of life.
+                </p>
               </div>
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-                <img 
-                  src={busImage} 
-                  alt="Public transportation" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-                <img 
-                  src={wheelchairImage} 
-                  alt="Independent mobility options" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
+              <div className="aspect-video bg-[#333] rounded-lg flex items-center justify-center">
+                <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-red-700 transition-colors">
+                  <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Become Independently Mobile Section */}
+        {/* Benefits of Mobility Section */}
         <section className="py-16 md:py-20 bg-gray-50">
           <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            {/* Yellow accent line */}
-            <div className="w-full h-1 mb-8 bg-[#f4d03f]" />
-            
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1a5276]">
-              Become Independently Mobile
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276]">
+              Benefits of Mobility
             </h2>
-            <p className="text-gray-600 max-w-4xl mb-12 text-lg">
-              The ETA program guides you on a journey to independent mobility, ensuring you understand the benefits, find the best mobility option for you, and have the tools needed to start getting around independently.
+            <p className="text-gray-700 max-w-5xl mb-12 text-lg leading-relaxed">
+              The transition to adulthood for autistic adolescents is a complex process with a unique set of challenges for in-dependent living, employment, and social engagement (Chun 2023). Safe independent transport—whether via personal vehicle, public transit, rideshare, bicycle, foot, or micromobility device—has great potential to improve autistic teens' opportunities, and ultimately well-being and health.
             </p>
 
-            {/* Three Column Layout */}
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              {/* Column 1: Understand the Benefits */}
-              <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center justify-center w-14 h-14 rounded-full mb-6 bg-[#f4d03f]">
-                  <span className="text-xl font-bold text-[#1a5276]">1</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-[#1a5276]">
-                  Understand the Benefits
-                </h3>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div>
+                <h3 className="text-xl font-bold mb-4 text-gray-800">Physical Development</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Independent mobility empowers individuals to access essential services, pursue vocational and educational opportunities, and engage in social activities without relying on others. It fosters a sense of confidence and self-reliance.
+                  Independent mobility encourages increased physical activity, which can lead to improved motor skills and overall physical health. It allows for the development of coordination and balance as individuals navigate different environments. Regular movement and exercise can enhance cardiovascular health and strengthen muscles, contributing to a healthier lifestyle.
                 </p>
               </div>
-
-              {/* Column 2: Find your Mobility Fit */}
-              <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center justify-center w-14 h-14 rounded-full mb-6 bg-[#f4d03f]">
-                  <span className="text-xl font-bold text-[#1a5276]">2</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-[#1a5276]">
-                  Find your Mobility Fit
-                </h3>
+              <div>
+                <h3 className="text-xl font-bold mb-4 text-gray-800">Social Development</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  There are lots of different ways to get around independently including walking, riding a bike, taking a bus or train, and even driving. The ETA program will help you discover which of these options is best for your family.
+                  Independent mobility provides opportunities for autistic individuals to interact with others in various settings, fostering social engagement and communication skills. Navigating public spaces and engaging in community activities can help build confidence and independence in social situations. Additionally, it encourages participation in group activities and events, promoting a sense of belonging and improving social networks.
                 </p>
               </div>
-
-              {/* Column 3: Prepare to be Mobile */}
-              <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center justify-center w-14 h-14 rounded-full mb-6 bg-[#f4d03f]">
-                  <span className="text-xl font-bold text-[#1a5276]">3</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-[#1a5276]">
-                  Prepare to be Mobile
-                </h3>
+              <div>
+                <h3 className="text-xl font-bold mb-4 text-gray-800">Independence</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Once you identify the mobility option to pursue, there are many steps you can take to get ready. The ETA program offers resources like video training, at-home activities, and daily living tasks to help develop the skills needed.
+                  Most autistic adults rely on family and friends to meet their transport needs (Deka 2016; Feeley 2010). This reliance limits daily activities and opportunities and places a burden on family and friends who provide rides or supervision (Feeley 2010).
                 </p>
               </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
-              <Button className="text-white px-6 py-3 font-medium bg-[#1a5276] hover:bg-[#154360]">
-                Take Our Mobility Assessment
-              </Button>
-              <Button 
-                variant="outline" 
-                className="px-6 py-3 font-medium border-2 border-[#1a5276] text-[#1a5276] hover:bg-[#1a5276] hover:text-white"
-              >
-                Think you are ready to drive? Find out!
-              </Button>
             </div>
           </div>
         </section>
 
         {/* Stories from People Section */}
-        <section id="about" className="py-16 md:py-20 bg-[#1a5276]">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
+        <section className="relative py-16 md:py-20 overflow-hidden bg-[#1a5276]">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white">
               Stories from People
             </h2>
 
-            <div className="relative">
-              {/* Testimonial Card */}
-              <div className="flex flex-col lg:flex-row items-center gap-8">
-                {/* Left Arrow */}
+            <div className="relative bg-white rounded-lg overflow-hidden">
+              <div className="grid md:grid-cols-2">
+                <div className="p-8 md:p-12 relative">
+                  <div className="absolute top-4 left-4">
+                    <svg 
+                      className="absolute left-0 top-0 h-full w-24" 
+                      viewBox="0 0 100 100" 
+                      preserveAspectRatio="none"
+                    >
+                      <polygon points="0,0 100,0 0,100" fill="#1a5276" />
+                    </svg>
+                  </div>
+                  
+                  <div className="relative z-10 pt-8">
+                    <span className="text-[#1a5276] text-6xl font-serif">"</span>
+                    <p className="text-[#1a5276] text-lg leading-relaxed mb-6 italic">
+                      {testimonials[currentTestimonial].quote}
+                    </p>
+                    <span className="text-[#1a5276] text-6xl font-serif float-right -mt-4">"</span>
+                    <div className="clear-both pt-4">
+                      <p className="text-gray-600">
+                        <span className="font-medium">{testimonials[currentTestimonial].author}</span>, {testimonials[currentTestimonial].role}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="hidden md:block">
+                  <img 
+                    src={motherDaughterImage} 
+                    alt="Parent and teen" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="absolute left-4 top-1/2 -translate-y-1/2">
                 <button 
                   onClick={prevTestimonial}
-                  className="flex-shrink-0 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white transition-colors"
-                  aria-label="Previous testimonial"
+                  className="w-12 h-12 rounded-full bg-[#1a5276] text-white flex items-center justify-center hover:bg-[#154360] transition-colors"
                 >
                   <ChevronLeft className="h-6 w-6" />
                 </button>
-
-                {/* Testimonial Content */}
-                <div className="flex-1 flex flex-col lg:flex-row items-center gap-8 bg-white/10 backdrop-blur-sm p-8 rounded-xl">
-                  <div className="flex-1">
-                    <div className="text-6xl mb-4 text-[#f4d03f]">"</div>
-                    <p className="text-white text-xl italic mb-6 leading-relaxed">
-                      {testimonials[currentTestimonial].quote}
-                    </p>
-                    <p className="text-white/80 text-base font-medium">
-                      — {testimonials[currentTestimonial].author}, {testimonials[currentTestimonial].role}
-                    </p>
-                  </div>
-                  <div className="w-72 h-72 flex-shrink-0 overflow-hidden rounded-xl shadow-lg">
-                    <img 
-                      src={motherDaughterImage} 
-                      alt="Family testimonial" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-
-                {/* Right Arrow */}
+              </div>
+              <div className="absolute right-4 top-1/2 -translate-y-1/2">
                 <button 
                   onClick={nextTestimonial}
-                  className="flex-shrink-0 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white transition-colors"
-                  aria-label="Next testimonial"
+                  className="w-12 h-12 rounded-full bg-[#1a5276] text-white flex items-center justify-center hover:bg-[#154360] transition-colors"
                 >
                   <ChevronRight className="h-6 w-6" />
                 </button>
               </div>
 
-              {/* Dots Indicator */}
-              <div className="flex justify-center gap-3 mt-8">
+              <div className="flex justify-center gap-2 pb-6">
                 {testimonials.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentTestimonial ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/60'
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      currentTestimonial === index ? 'bg-[#1a5276]' : 'bg-gray-300'
                     }`}
-                    aria-label={`Go to testimonial ${index + 1}`}
                   />
                 ))}
               </div>
@@ -300,99 +225,74 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* The Latest Research Section */}
+        {/* Explore Mobility Options Section */}
         <section className="py-16 md:py-20 bg-white">
           <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1a5276]">
-              The Latest Research
-            </h2>
-            <p className="text-gray-600 mb-10 text-lg">
-              Check out some of the latest research on independent mobility.
-            </p>
-
-            {/* Research Cards - 2 columns per Figma */}
-            <div className="grid md:grid-cols-2 gap-8 mb-10 max-w-3xl">
-              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={therapistImage1} 
-                    alt="Research study" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-base font-semibold mb-4 line-clamp-3 text-[#1a5276]">
-                    Independent community mobility and driving experiences of adults on the autism spectrum: A scoping review
-                  </h3>
-                  <Button className="text-white text-sm px-5 py-2 bg-[#1a5276] hover:bg-[#154360]">
-                    CTA
-                  </Button>
-                </div>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-2 text-[#1a5276]">
+                  Explore Mobility
+                </h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#1a5276]">
+                  Options
+                </h2>
+                <div className="w-16 h-1 bg-[#1a5276] mb-8" />
+                
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  Autistic adolescents have a variety of mobility options to support their independence and development. These options include personal mobility devices such as bicycles, scooters, and skateboards, which can enhance their physical coordination and provide a sense of freedom. Additionally, public transportation systems like buses and trains are accessible options, often with accommodations such as priority seating and assistance from transit staff. For those who prefer more personalized solutions, ride-sharing services and community-based transportation programs offer convenient and flexible options.
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  Some adolescents may also benefit from specialized mobility training programs that teach them how to safely navigate different environments and use various transportation modes confidently. These diverse mobility options empower autistic adolescents to explore their surroundings, engage in social activities, and develop essential life skills.
+                </p>
               </div>
-
-              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={therapistImage2} 
-                    alt="Research study" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-base font-semibold mb-4 line-clamp-3 text-[#1a5276]">
-                    The role for occupational therapists in community mobility training for people with autism spectrum disorders
-                  </h3>
-                  <Button className="text-white text-sm px-5 py-2 bg-[#1a5276] hover:bg-[#154360]">
-                    CTA
-                  </Button>
-                </div>
+              <div className="flex justify-center">
+                <img 
+                  src={mobilityIllustration} 
+                  alt="Mobility illustration" 
+                  className="max-w-full h-auto rounded-lg"
+                />
               </div>
             </div>
-
-            <Button 
-              variant="outline" 
-              className="font-medium border-2 border-[#1a5276] text-[#1a5276] hover:bg-[#1a5276] hover:text-white"
-            >
-              View all research
-            </Button>
           </div>
         </section>
 
-        {/* Are You Ready Section - Assessment CTA */}
-        <section className="relative py-16 md:py-20 overflow-hidden bg-[#7cb342]">
-          {/* Background image on right */}
+        {/* CTA Section - Green background */}
+        <section className="relative py-16 md:py-20 overflow-hidden bg-[#7B8C2A]">
           <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block">
             <div 
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url(${teenBackpackImage})` }}
             />
             <svg className="absolute left-0 top-0 bottom-0 h-full w-32" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <polygon points="0,0 100,0 0,100" fill="#7cb342" />
+              <polygon points="0,0 100,0 0,100" fill="#7B8C2A" />
             </svg>
           </div>
 
           <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative">
             <div className="max-w-lg">
-              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-2 text-[#1a5276]">
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-2 text-[#1a5276] italic">
                 Are You Ready to Be
               </h2>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276]">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#1a5276] italic">
                 Independently Mobile?
               </h2>
-              <div className="w-20 h-1 mb-6 bg-[#1a5276]" />
+              <div className="w-16 h-1 bg-[#1a5276] mb-8" />
               <p className="mb-8 text-lg leading-relaxed text-[#1a5276]">
                 Not sure if you are ready to be independently mobile? Click the link below to take the independent mobility assessment. This quick questionnaire will give you more information about what mobility option might be best for you and what skills you need for each.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="text-white px-6 py-3 font-medium w-full sm:w-auto bg-[#1a5276] hover:bg-[#154360]">
+              <div className="flex flex-col gap-4">
+                <Button 
+                  variant="outline"
+                  className="px-6 py-3 font-medium w-fit border-2 border-[#1a5276] text-[#1a5276] bg-transparent hover:bg-[#1a5276] hover:text-white"
+                >
                   Take our Independent Mobility Assessment
                 </Button>
                 <Button 
-                  variant="outline" 
-                  className="px-6 py-3 font-medium border-2 w-full sm:w-auto border-[#1a5276] text-[#1a5276] hover:bg-[#1a5276] hover:text-white"
+                  variant="outline"
+                  className="px-6 py-3 font-medium w-fit border-2 border-[#1a5276] text-[#1a5276] bg-transparent hover:bg-[#1a5276] hover:text-white"
                 >
-                  Think you are ready to drive?
+                  Think you are ready to drive? Find out!
                 </Button>
               </div>
             </div>
