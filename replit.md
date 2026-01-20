@@ -111,3 +111,16 @@ Preferred communication style: Simple, everyday language.
 - `learning_paths`: Programs grouping multiple modules
 - `learning_path_modules`: Module ordering with prerequisites
 - `user_learning_paths`: User enrollment and progress tracking
+
+### Public-Facing Pages (No Login Required)
+- **Homepage** (`/[locale]`): "What is Independent Mobility?" with hero, mobility icons, testimonials, research cards
+- **Mobility Options** (`/[locale]/mobility/`):
+  - **Pedestrian** (`/pedestrian`): Walking skills, crosswalk safety, route planning
+  - **Biking** (`/biking`): Cycling skills, traffic rules, route planning
+  - **Driving** (`/driving`): Path to licensing with autism-informed support
+  - **Public Transit** (`/public-transit`): Bus/train navigation, reading schedules
+  - **Rideshare** (`/rideshare`): App usage, safety verification, budgeting
+- **Reusable Public Components** (`src/components/public/`):
+  - PublicHeader: Navigation with dropdown menus
+  - PublicFooter: CHOP Research Institute footer
+  - MobilityHero: Hero section with diagonal image overlay
