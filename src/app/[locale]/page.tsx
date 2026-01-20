@@ -1,23 +1,19 @@
 'use client';
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { 
-  Search, 
-  User,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Footprints,
   Car,
   Bus,
   Bike,
-  Train,
-  LayoutDashboard
+  Train
 } from "lucide-react";
+import PublicHeader from "@/components/public/PublicHeader";
+import PublicFooter from "@/components/public/PublicFooter";
 
 const heroImage = "/images/hero-driver.jpg";
 const walkingImage = "/images/person_walking_on_si_cd47e8a3.jpg";
@@ -29,11 +25,7 @@ const therapistImage1 = "/images/occupational_therapi_ca8af19f.jpg";
 const therapistImage2 = "/images/occupational_therapi_c4615718.jpg";
 
 export default function HomePage() {
-  const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'en';
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const { data: session } = useSession();
-  const isLoggedIn = !!session?.user;
 
   const testimonials = [
     {
@@ -63,71 +55,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full text-white" style={{ backgroundColor: '#5b2c6f' }}>
-        <div className="w-full px-4 md:px-8 flex h-16 items-center justify-between max-w-[1400px] mx-auto">
-          <div className="flex items-center gap-6">
-            {/* ETA Logo */}
-            <Link href={`/${locale}`} className="flex items-center gap-3">
-              <div className="flex items-center">
-                <span className="text-2xl font-bold text-[#f4d03f]">ET</span>
-                <span className="text-2xl font-bold flex items-center text-[#f4d03f]">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 inline mx-[-2px] text-[#f4d03f]" fill="currentColor">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
-                  A
-                </span>
-              </div>
-              <div className="border-l border-white/30 pl-3 hidden md:block">
-                <span className="text-xs font-medium leading-tight block">Empowering Transportation</span>
-                <span className="text-xs font-medium leading-tight block">among Autistic adolescents</span>
-              </div>
-            </Link>
-          </div>
-
-          {/* Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
-            <a href="#top" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-              What is Independent Mobility?
-            </a>
-            <a href="#options" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-              Independent Mobility Options
-              <ChevronDown className="h-4 w-4" />
-            </a>
-            <a href="#prepare" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-              Prepare to be Mobile
-              <ChevronDown className="h-4 w-4" />
-            </a>
-            <a href="#driving" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
-              Driving with Autism
-              <ChevronDown className="h-4 w-4" />
-            </a>
-          </nav>
-
-          {/* Search and Login/Dashboard */}
-          <div className="flex items-center gap-4">
-            <button className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
-              <Search className="h-4 w-4" />
-              <span className="hidden sm:inline">Search</span>
-            </button>
-            {isLoggedIn ? (
-              <Link href={`/${locale}/dashboard`} className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
-                <LayoutDashboard className="h-4 w-4" />
-                <span className="hidden sm:inline">Dashboard</span>
-              </Link>
-            ) : (
-              <Link href={`/${locale}/auth/login`} className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
-                <User className="h-4 w-4" />
-                <span className="hidden sm:inline">Login</span>
-              </Link>
-            )}
-            <Link href={`/${locale}/auth/login?callbackUrl=/${locale}/staff`} className="text-xs text-white/60 hover:text-white/80 transition-colors">
-              Staff
-            </Link>
-          </div>
-        </div>
-      </header>
+      <PublicHeader />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -473,98 +401,7 @@ export default function HomePage() {
 
       </main>
 
-      {/* Footer - CHOP Research Institute Section */}
-      <footer className="bg-[#f5f5f0] pt-16 pb-8">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-          {/* CHOP Research Institute Header */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-12 pb-12 border-b border-gray-300">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center">
-                <div className="w-12 h-14 flex items-center justify-center">
-                  <svg viewBox="0 0 40 48" className="w-10 h-12" fill="none">
-                    <path d="M20 0C8.954 0 0 8.954 0 20v8c0 11.046 8.954 20 20 20s20-8.954 20-20v-8C40 8.954 31.046 0 20 0z" fill="#1a5276"/>
-                    <text x="20" y="30" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CH</text>
-                  </svg>
-                </div>
-                <div className="ml-2">
-                  <p className="text-lg font-bold text-[#1a5276]">Children's Hospital</p>
-                  <p className="text-lg font-bold text-[#1a5276]">of Philadelphia</p>
-                  <p className="text-sm font-medium text-[#17a589]">RESEARCH INSTITUTE</p>
-                </div>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-gray-700">3401 Civic Center Blvd.</p>
-              <p className="text-gray-700">Philadelphia, PA 19104</p>
-            </div>
-          </div>
-
-          {/* Footer Links - 4 columns per Figma */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            <div>
-              <h3 className="font-semibold mb-4 text-[#1a5276]">What is Independent Mobility?</h3>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4 text-[#1a5276]">Independent Mobility Options</h3>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Pedestrian</a></li>
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Biking</a></li>
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Driving</a></li>
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Public Transit</a></li>
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Rideshare</a></li>
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Explore all Options</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4 text-[#1a5276]">Prepare to be Mobile</h3>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">How to Prepare</a></li>
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Build Mobility Skills</a></li>
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Resources and Support</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4 text-[#1a5276]">Driving with Autism</h3>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Prepare to Drive</a></li>
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors flex items-center gap-2">Driving Lessons <span className="text-[#7cb342]">●</span></a></li>
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Driving Resource Library</a></li>
-                <li><a href="#" className="hover:text-[#1a5276] transition-colors">Frequently Asked Questions</a></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Award Badges */}
-          <div className="flex items-center gap-6 mb-8">
-            <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500 font-semibold">
-              BEST
-            </div>
-            <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500 font-semibold">
-              MAGNET
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="border-t border-gray-300 pt-6">
-            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 mb-4">
-              <a href="#" className="hover:text-[#1a5276] transition-colors">About Us</a>
-              <span>|</span>
-              <a href="#" className="hover:text-[#1a5276] transition-colors">Contact Us</a>
-              <span>|</span>
-              <a href="#" className="hover:text-[#1a5276] transition-colors">Privacy Policy</a>
-              <span>|</span>
-              <a href="#" className="hover:text-[#1a5276] transition-colors">Terms of Use</a>
-              <span>|</span>
-              <a href="#" className="hover:text-[#1a5276] transition-colors">Ethics & Compliance</a>
-              <span>|</span>
-              <a href="#" className="hover:text-[#1a5276] transition-colors">HIPAA Notice of Privacy Practices</a>
-            </div>
-            <p className="text-sm text-gray-500">
-              ©2025 The Children's Hospital of Philadelphia. Children's Hospital of Philadelphia is a charitable 501(c)(3) nonprofit organization.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   );
 }
