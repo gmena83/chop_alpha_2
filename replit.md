@@ -97,6 +97,8 @@ Preferred communication style: Simple, everyday language.
   - YouTube/Vimeo embed URL support as alternative to uploads
   - Toggle module/step active status
   - Bilingual content support (English/Spanish)
+  - **Quiz Management**: Add quiz questions to video steps with configurable passing thresholds (70%, 80%, 90%, 100%)
+  - **Helper Text & Extra Help**: Add supplementary content and link additional video/text resources for learner support
 - **User Management** (`/[locale]/staff/users`):
   - View all users with pagination and filtering
   - Create new user accounts with role assignment
