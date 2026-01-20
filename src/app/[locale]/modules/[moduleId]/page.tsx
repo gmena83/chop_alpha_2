@@ -6,7 +6,8 @@ import { StepNavigation } from '@/components/lms/StepNavigation';
 import { StepContent } from '@/components/lms/StepContent';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Home, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Home, ChevronLeft, ChevronRight, Trophy, CheckCircle } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface QuizQuestion {
   id: string;
@@ -70,6 +71,8 @@ export default function ModuleViewerPage({
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [quizScores, setQuizScores] = useState<Record<string, number>>({});
+  const [showModuleComplete, setShowModuleComplete] = useState(false);
 
   const isSpanish = locale === 'es';
 
@@ -116,9 +119,13 @@ export default function ModuleViewerPage({
     }
   };
 
-  const markStepComplete = async () => {
+  const markStepComplete = async (quizScore?: number) => {
     const currentStep = steps[currentStepIndex];
     if (!currentStep) return;
+
+    if (quizScore !== undefined) {
+      setQuizScores(prev => ({ ...prev, [currentStep.id]: quizScore }));
+    }
 
     try {
       const response = await fetch(`/api/modules/${moduleId}/progress`, {
@@ -126,7 +133,8 @@ export default function ModuleViewerPage({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           stepId: currentStep.id,
-          status: 'completed'
+          status: 'completed',
+          quizScore
         })
       });
 
@@ -271,7 +279,7 @@ export default function ModuleViewerPage({
               <Button
                 onClick={() => {
                   if (currentStepIndex === steps.length - 1) {
-                    router.push(`/${locale}/dashboard`);
+                    setShowModuleComplete(true);
                   } else {
                     setCurrentStepIndex(currentStepIndex + 1);
                   }
@@ -281,11 +289,11 @@ export default function ModuleViewerPage({
                 {currentStepIndex === steps.length - 1 ? (
                   <>
                     <Home className="h-4 w-4" />
-                    Finish
+                    {isSpanish ? 'Finalizar' : 'Finish'}
                   </>
                 ) : (
                   <>
-                    Next
+                    {isSpanish ? 'Siguiente' : 'Next'}
                     <ChevronRight className="h-4 w-4" />
                   </>
                 )}
@@ -294,6 +302,124 @@ export default function ModuleViewerPage({
           </div>
         </main>
       </div>
+
+      {showModuleComplete && (
+        <ModuleCompletionModal
+          module={module}
+          steps={steps}
+          quizScores={quizScores}
+          locale={isSpanish ? 'es' : 'en'}
+          onClose={() => router.push(`/${locale}/dashboard`)}
+        />
+      )}
+    </div>
+  );
+}
+
+function ModuleCompletionModal({
+  module,
+  steps,
+  quizScores,
+  locale,
+  onClose
+}: {
+  module: Module | null;
+  steps: Step[];
+  quizScores: Record<string, number>;
+  locale: 'en' | 'es';
+  onClose: () => void;
+}) {
+  const labels = {
+    en: {
+      congratulations: 'Congratulations!',
+      completed: 'You have completed',
+      yourScore: 'Your Quiz Scores',
+      overallScore: 'Overall Score',
+      noQuizzes: 'No quizzes in this module',
+      backToDashboard: 'Back to Dashboard',
+    },
+    es: {
+      congratulations: '¡Felicidades!',
+      completed: 'Has completado',
+      yourScore: 'Tus Puntuaciones de Quiz',
+      overallScore: 'Puntuación General',
+      noQuizzes: 'No hay cuestionarios en este módulo',
+      backToDashboard: 'Volver al Panel',
+    },
+  };
+
+  const t = labels[locale];
+  const isSpanish = locale === 'es';
+
+  const quizSteps = steps.filter(s => 
+    (isSpanish ? s.quizQuestionsEs : s.quizQuestionsEn) && 
+    (isSpanish ? s.quizQuestionsEs : s.quizQuestionsEn)!.length > 0
+  );
+
+  const scores = Object.values(quizScores);
+  const overallScore = scores.length > 0 
+    ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) 
+    : null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <Card className="w-full max-w-md">
+        <CardContent className="pt-6 text-center">
+          <div className="mb-4">
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+              <Trophy className="h-10 w-10 text-green-600" />
+            </div>
+          </div>
+
+          <h2 className="text-2xl font-bold text-[#1a5276] mb-2">{t.congratulations}</h2>
+          <p className="text-gray-600 mb-6">
+            {t.completed} <span className="font-semibold">{isSpanish ? module?.titleEs : module?.titleEn}</span>
+          </p>
+
+          {quizSteps.length > 0 ? (
+            <div className="bg-gray-50 rounded-lg p-4 mb-6">
+              <h3 className="font-semibold text-gray-800 mb-3">{t.yourScore}</h3>
+              <div className="space-y-2">
+                {quizSteps.map(step => {
+                  const score = quizScores[step.id];
+                  return (
+                    <div key={step.id} className="flex items-center justify-between text-sm">
+                      <span className="text-gray-600">{isSpanish ? step.titleEs : step.titleEn}</span>
+                      <span className={`font-medium ${score !== undefined ? (score >= 70 ? 'text-green-600' : 'text-red-600') : 'text-gray-400'}`}>
+                        {score !== undefined ? `${score}%` : '-'}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+              
+              {overallScore !== null && (
+                <div className="mt-4 pt-4 border-t">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-gray-800">{t.overallScore}</span>
+                    <span className={`text-xl font-bold ${overallScore >= 70 ? 'text-green-600' : 'text-red-600'}`}>
+                      {overallScore}%
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="bg-gray-50 rounded-lg p-4 mb-6 flex items-center gap-3 justify-center">
+              <CheckCircle className="h-5 w-5 text-green-600" />
+              <span className="text-gray-600">{t.noQuizzes}</span>
+            </div>
+          )}
+
+          <Button 
+            onClick={onClose}
+            className="w-full bg-[#1a5276] hover:bg-[#154360]"
+          >
+            <Home className="h-4 w-4 mr-2" />
+            {t.backToDashboard}
+          </Button>
+        </CardContent>
+      </Card>
     </div>
   );
 }
