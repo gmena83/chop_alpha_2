@@ -120,6 +120,19 @@ export const steps = pgTable('steps', {
   videoUrlEs: varchar('video_url_es', { length: 500 }),
   checklistItemsEn: jsonb('checklist_items_en'),
   checklistItemsEs: jsonb('checklist_items_es'),
+  // Quiz questions for video steps (array of {question, options[], correctIndex})
+  quizQuestionsEn: jsonb('quiz_questions_en'),
+  quizQuestionsEs: jsonb('quiz_questions_es'),
+  // Passing threshold percentage (70, 80, 90, or 100)
+  quizPassingThreshold: integer('quiz_passing_threshold'),
+  // Helper text displayed with the video
+  helperTextEn: text('helper_text_en'),
+  helperTextEs: text('helper_text_es'),
+  // Extra help resources (video URL or text)
+  extraHelpVideoUrlEn: varchar('extra_help_video_url_en', { length: 500 }),
+  extraHelpVideoUrlEs: varchar('extra_help_video_url_es', { length: 500 }),
+  extraHelpTextEn: text('extra_help_text_en'),
+  extraHelpTextEs: text('extra_help_text_es'),
   assessmentId: uuid('assessment_id').references(() => assessments.id, { onDelete: 'set null' }),
   metadata: jsonb('metadata'),
   isRequired: boolean('is_required').notNull().default(true),
