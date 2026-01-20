@@ -1,12 +1,18 @@
 'use client';
 
-import { Car, CheckCircle, ArrowRight, Shield } from "lucide-react";
+import { Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PublicHeader from "@/components/public/PublicHeader";
 import PublicFooter from "@/components/public/PublicFooter";
-import MobilityHero from "@/components/public/MobilityHero";
 
-const drivingImage = "/images/hero-driver.jpg";
+const heroImage = "/images/young_woman_driving__394b7a25.jpg";
+const skateboardImage = "/images/teenage_girl_student_936ca063.jpg";
+
+const readinessQuestions = [
+  "Can you tolerate rides from unfamiliar people to unfamiliar places?",
+  "Can you sit or stand without being disruptive, such as spinning or shouting?",
+  "Can you plan a route to a specified destination?"
+];
 
 export default function DrivingPage() {
   return (
@@ -14,209 +20,111 @@ export default function DrivingPage() {
       <PublicHeader />
       
       <main className="flex-1">
-        <MobilityHero
-          title="Driving"
-          subtitle="Your Path to Complete Independence"
-          description="Driving offers the greatest flexibility and independence in transportation. Learn about the journey to becoming a licensed driver with autism-informed support."
-          heroImage={drivingImage}
-          icon={<Car className="h-8 w-8 text-white" />}
-          bgColor="#7B8C2A"
-        />
-
-        <section className="py-16 md:py-20 bg-white">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276]">
-              Driving with Autism
-            </h2>
-            <p className="text-gray-600 max-w-4xl mb-12 text-lg leading-relaxed">
-              Many autistic individuals are successful drivers. Research shows that with proper training and support, autistic teens and adults can learn to drive safely. The ETA program provides autism-informed resources and guidance throughout the licensing process.
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-                <img 
-                  src="/images/young_woman_driving__394b7a25.jpg" 
-                  alt="Teen learning to drive" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-                <img 
-                  src={drivingImage}
-                  alt="Confident driver" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-                <img 
-                  src="/images/mother_and_teenage_d_cdeb60a5.jpg" 
-                  alt="Parent teaching teen to drive" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 md:py-20 bg-gray-50">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <div className="w-full h-1 mb-8 bg-[#f4d03f]" />
-            
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1a5276]">
-              The Path to Driving
-            </h2>
-            <p className="text-gray-600 max-w-4xl mb-12 text-lg">
-              The ETA program breaks down the driving journey into manageable steps with autism-specific support at each stage.
-            </p>
-
-            <div className="grid md:grid-cols-4 gap-6 mb-12">
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full mb-4 bg-[#f4d03f]">
-                  <span className="text-lg font-bold text-[#1a5276]">1</span>
-                </div>
-                <h3 className="text-lg font-semibold mb-3 text-[#1a5276]">
-                  Readiness Assessment
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Evaluate driving readiness and identify areas for skill development before starting lessons.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full mb-4 bg-[#f4d03f]">
-                  <span className="text-lg font-bold text-[#1a5276]">2</span>
-                </div>
-                <h3 className="text-lg font-semibold mb-3 text-[#1a5276]">
-                  Learner's Permit
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Study for and pass the written test. Get your learner's permit to begin supervised driving.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full mb-4 bg-[#f4d03f]">
-                  <span className="text-lg font-bold text-[#1a5276]">3</span>
-                </div>
-                <h3 className="text-lg font-semibold mb-3 text-[#1a5276]">
-                  Practice Driving
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Build skills through supervised practice with parents and professional driving instructors.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full mb-4 bg-[#f4d03f]">
-                  <span className="text-lg font-bold text-[#1a5276]">4</span>
-                </div>
-                <h3 className="text-lg font-semibold mb-3 text-[#1a5276]">
-                  Driver's License
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Pass the road test and earn your driver's license. Continue building safe driving habits.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <Button className="text-white px-6 py-3 font-medium bg-[#1a5276] hover:bg-[#154360]">
-                Take Driving Readiness Assessment
-              </Button>
-              <Button 
-                variant="outline" 
-                className="px-6 py-3 font-medium border-2 border-[#1a5276] text-[#1a5276] hover:bg-[#1a5276] hover:text-white flex items-center gap-2"
-              >
-                Find Autism-Friendly Driving Schools <ArrowRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 md:py-20 bg-white">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#1a5276]">
-              Autism-Informed Support
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="flex gap-4 p-6 bg-gray-50 rounded-lg">
-                <Shield className="h-8 w-8 text-[#7cb342] flex-shrink-0" />
-                <div>
-                  <h3 className="text-lg font-semibold mb-2 text-[#1a5276]">Sensory Considerations</h3>
-                  <p className="text-gray-600">
-                    Learn strategies for managing sensory input while driving, including traffic noise, bright lights, and visual distractions.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 p-6 bg-gray-50 rounded-lg">
-                <Shield className="h-8 w-8 text-[#7cb342] flex-shrink-0" />
-                <div>
-                  <h3 className="text-lg font-semibold mb-2 text-[#1a5276]">Executive Function Support</h3>
-                  <p className="text-gray-600">
-                    Tools and techniques for planning routes, managing time, and handling unexpected situations on the road.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 p-6 bg-gray-50 rounded-lg">
-                <Shield className="h-8 w-8 text-[#7cb342] flex-shrink-0" />
-                <div>
-                  <h3 className="text-lg font-semibold mb-2 text-[#1a5276]">Social Situations</h3>
-                  <p className="text-gray-600">
-                    Navigate interactions with other drivers, traffic stops, and roadside assistance with confidence.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 p-6 bg-gray-50 rounded-lg">
-                <Shield className="h-8 w-8 text-[#7cb342] flex-shrink-0" />
-                <div>
-                  <h3 className="text-lg font-semibold mb-2 text-[#1a5276]">Anxiety Management</h3>
-                  <p className="text-gray-600">
-                    Strategies for managing driving anxiety and building confidence behind the wheel over time.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="relative py-16 md:py-20 overflow-hidden bg-[#7cb342]">
-          <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block">
+        {/* Hero Section - Pink/Magenta with diagonal */}
+        <section className="relative min-h-[380px] overflow-hidden">
+          <div className="absolute inset-0 bg-[#b5446e]" />
+          
+          <div className="absolute right-0 top-0 bottom-0 w-[55%] hidden lg:block overflow-hidden">
             <div 
               className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(/images/teenage_girl_student_936ca063.jpg)` }}
+              style={{ backgroundImage: `url(${heroImage})` }}
             />
-            <svg className="absolute left-0 top-0 bottom-0 h-full w-32" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <polygon points="0,0 100,0 0,100" fill="#7cb342" />
+            <svg 
+              className="absolute left-0 top-0 h-full w-48" 
+              viewBox="0 0 100 100" 
+              preserveAspectRatio="none"
+            >
+              <polygon points="0,0 100,0 0,100" fill="#b5446e" />
             </svg>
           </div>
 
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative py-12 md:py-16">
             <div className="max-w-lg">
-              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-2 text-[#1a5276]">
-                Ready to Start Your
-              </h2>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276]">
-                Driving Journey?
-              </h2>
-              <div className="w-20 h-1 mb-6 bg-[#1a5276]" />
-              <p className="mb-8 text-lg leading-relaxed text-[#1a5276]">
-                Take our comprehensive driving readiness assessment to understand where you are in your journey and get personalized next steps.
-              </p>
+              <div className="mb-6">
+                <Car className="h-10 w-10 text-white" />
+              </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="text-white px-6 py-3 font-medium w-full sm:w-auto bg-[#1a5276] hover:bg-[#154360]">
-                  Take Driving Assessment
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="px-6 py-3 font-medium border-2 w-full sm:w-auto border-[#1a5276] text-[#1a5276] hover:bg-[#1a5276] hover:text-white"
-                >
-                  View Driving Resources
-                </Button>
+              <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-8">
+                Driving
+              </h1>
+
+              <Button className="bg-[#f4d03f] text-[#1a5276] px-6 py-3 font-medium hover:bg-[#f1c40f] border-2 border-[#b5446e]">
+                Take Our Independent Mobility Assessment
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* What to expect Section */}
+        <section className="py-16 md:py-20 bg-[#f5f5f0]">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gray-800">
+              What to expect.
+            </h2>
+            <p className="text-gray-700 max-w-5xl text-lg leading-relaxed">
+              Public transit can pose challenges for autistic individuals due to sensory sensitivities, anxiety, and the need for predictability. Tools like noise-canceling headphones, visual aids, and transit apps can help manage these difficulties. Rehearsing routes, using social stories, and support systems like travel training or companions enhance confidence. With improved accessibility and understanding, public transit can become a viable option for many autistic individuals. Building awareness among transit providers and passengers is key to creating a more inclusive environment.
+            </p>
+          </div>
+        </section>
+
+        {/* Are you ready Section */}
+        <section className="py-16 md:py-20 bg-[#f5f5f0]">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-800">
+              Are you ready to use public transit?
+            </h2>
+            
+            <div className="max-w-3xl">
+              {readinessQuestions.map((question, index) => (
+                <div key={index}>
+                  <p className="text-gray-700 py-4">{question}</p>
+                  {index < readinessQuestions.length - 1 && (
+                    <div className="border-b border-gray-300" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* What mobility options are you ready for? Section */}
+        <section className="py-16 md:py-20 bg-[#f5f5dc]/30">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-2 text-[#1a5276] italic">
+                  What mobility options are you
+                </h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276] italic">
+                  ready for?
+                </h2>
+                <div className="w-16 h-1 bg-[#1a5276] mb-8" />
+                
+                <p className="text-gray-700 leading-relaxed mb-8 text-lg">
+                  Not sure if you are ready to be independently mobile? Click the link below to take the independent mobility assessment. This quick questionnaire will give you more information about what mobility option might be best for you and what skills you need for each.
+                </p>
+
+                <div className="flex flex-col gap-4">
+                  <Button 
+                    variant="outline"
+                    className="px-6 py-3 font-medium w-fit border-2 border-[#1a5276] text-[#1a5276] bg-transparent hover:bg-[#1a5276] hover:text-white"
+                  >
+                    Take our Independent Mobility Assessment
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    className="px-6 py-3 font-medium w-fit border-2 border-[#1a5276] text-[#1a5276] bg-transparent hover:bg-[#1a5276] hover:text-white"
+                  >
+                    Think you are ready to drive? Find Out!
+                  </Button>
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <img 
+                  src={skateboardImage} 
+                  alt="Teen with skateboard" 
+                  className="max-w-full h-auto rounded-lg shadow-lg"
+                />
               </div>
             </div>
           </div>
