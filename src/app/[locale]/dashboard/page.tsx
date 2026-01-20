@@ -139,7 +139,10 @@ export default function DashboardPage() {
               Home
             </Link>
             <button 
-              onClick={() => signOut({ callbackUrl: `/${locale}` })}
+              onClick={async () => {
+                await signOut({ redirect: false });
+                window.location.href = `/${locale}`;
+              }}
               className="flex items-center gap-2 text-sm hover:text-[#f4d03f]"
             >
               <LogOut className="h-4 w-4" />

@@ -145,7 +145,10 @@ export default function StaffLayout({
             <Button
               variant="ghost"
               className="w-full justify-start gap-3 text-red-600 hover:text-red-700 hover:bg-red-50"
-              onClick={() => signOut({ callbackUrl: `/${locale}` })}
+              onClick={async () => {
+                await signOut({ redirect: false });
+                window.location.href = `/${locale}`;
+              }}
             >
               <LogOut className="h-5 w-5" />
               Sign Out
