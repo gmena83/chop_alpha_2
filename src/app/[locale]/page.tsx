@@ -132,8 +132,8 @@ export default function HomePage() {
           {/* Hero image on right side with diagonal cut */}
           <div className="absolute right-0 top-0 bottom-0 w-[55%] hidden lg:block overflow-hidden">
             <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: 'right center' }}
+              className="absolute inset-0 bg-cover bg-no-repeat"
+              style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: '100% 50%', backgroundSize: 'auto 120%' }}
             />
             {/* Diagonal overlay from green side */}
             <svg 
