@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Save, Video, FileText, CheckSquare } from 'lucide-react';
+import { VideoUploader } from '@/components/upload/VideoUploader';
 
 const STEP_TYPES = [
   { value: 'content', label: 'Content', icon: FileText, description: 'Text-based learning content' },
@@ -234,32 +235,41 @@ export default function NewStepPage({
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="videoUrlEn">Video URL (English)</Label>
-                  <Input
-                    id="videoUrlEn"
-                    type="url"
+                <div className="space-y-4">
+                  <Label className="text-base font-semibold">English Video</Label>
+                  <VideoUploader
                     value={formData.videoUrlEn}
-                    onChange={(e) =>
-                      setFormData({ ...formData, videoUrlEn: e.target.value })
-                    }
-                    placeholder="https://youtube.com/embed/..."
+                    onChange={(url) => setFormData({ ...formData, videoUrlEn: url })}
                   />
-                  <p className="text-xs text-gray-500">
-                    Supports YouTube, Vimeo embed URLs
-                  </p>
+                  <div className="space-y-2">
+                    <Label htmlFor="videoUrlEn">Or paste video URL</Label>
+                    <Input
+                      id="videoUrlEn"
+                      value={formData.videoUrlEn}
+                      onChange={(e) =>
+                        setFormData({ ...formData, videoUrlEn: e.target.value })
+                      }
+                      placeholder="https://youtube.com/embed/... or uploaded video path"
+                    />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="videoUrlEs">Video URL (Spanish)</Label>
-                  <Input
-                    id="videoUrlEs"
-                    type="url"
+                <div className="space-y-4">
+                  <Label className="text-base font-semibold">Spanish Video</Label>
+                  <VideoUploader
                     value={formData.videoUrlEs}
-                    onChange={(e) =>
-                      setFormData({ ...formData, videoUrlEs: e.target.value })
-                    }
-                    placeholder="https://youtube.com/embed/..."
+                    onChange={(url) => setFormData({ ...formData, videoUrlEs: url })}
                   />
+                  <div className="space-y-2">
+                    <Label htmlFor="videoUrlEs">Or paste video URL</Label>
+                    <Input
+                      id="videoUrlEs"
+                      value={formData.videoUrlEs}
+                      onChange={(e) =>
+                        setFormData({ ...formData, videoUrlEs: e.target.value })
+                      }
+                      placeholder="https://youtube.com/embed/... or uploaded video path"
+                    />
+                  </div>
                 </div>
               </div>
 

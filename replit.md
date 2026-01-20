@@ -88,11 +88,13 @@ Preferred communication style: Simple, everyday language.
   - VideoPlayer: YouTube/Vimeo/direct video embed support
   - StepContent: Unified content renderer for all step types
 
-### Staff Portal (New)
+### Staff Portal
 - **Staff Dashboard** (`/[locale]/staff`): Overview stats, quick actions, system status
 - **Module Management** (`/[locale]/staff/modules`): 
   - Create, edit, and organize learning modules
-  - Manage steps with video URLs, markdown content, and checklists
+  - Manage steps with video uploads, video URLs, markdown content, and checklists
+  - Direct video file uploads (MP4, WebM, OGG, MOV up to 500MB) via Replit Object Storage
+  - YouTube/Vimeo embed URL support as alternative to uploads
   - Toggle module/step active status
   - Bilingual content support (English/Spanish)
 - **User Management** (`/[locale]/staff/users`):
