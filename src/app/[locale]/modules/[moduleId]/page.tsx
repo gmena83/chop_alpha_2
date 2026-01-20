@@ -8,6 +8,13 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Home, ChevronLeft, ChevronRight } from 'lucide-react';
 
+interface QuizQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctIndex: number;
+}
+
 interface Step {
   id: string;
   slug: string;
@@ -21,6 +28,15 @@ interface Step {
   videoUrlEs?: string;
   checklistItemsEn?: string[];
   checklistItemsEs?: string[];
+  quizQuestionsEn?: QuizQuestion[];
+  quizQuestionsEs?: QuizQuestion[];
+  quizPassingThreshold?: number;
+  helperTextEn?: string;
+  helperTextEs?: string;
+  extraHelpVideoUrlEn?: string;
+  extraHelpVideoUrlEs?: string;
+  extraHelpTextEn?: string;
+  extraHelpTextEs?: string;
   isRequired: boolean;
 }
 
@@ -224,10 +240,16 @@ export default function ModuleViewerPage({
                   title: isSpanish ? currentStep.titleEs : currentStep.titleEn,
                   bodyMd: isSpanish ? currentStep.bodyMdEs : currentStep.bodyMdEn,
                   videoUrl: isSpanish ? currentStep.videoUrlEs : currentStep.videoUrlEn,
-                  checklistItems: isSpanish ? currentStep.checklistItemsEs : currentStep.checklistItemsEn
+                  checklistItems: isSpanish ? currentStep.checklistItemsEs : currentStep.checklistItemsEn,
+                  quizQuestions: isSpanish ? currentStep.quizQuestionsEs : currentStep.quizQuestionsEn,
+                  quizPassingThreshold: currentStep.quizPassingThreshold,
+                  helperText: isSpanish ? currentStep.helperTextEs : currentStep.helperTextEn,
+                  extraHelpVideoUrl: isSpanish ? currentStep.extraHelpVideoUrlEs : currentStep.extraHelpVideoUrlEn,
+                  extraHelpText: isSpanish ? currentStep.extraHelpTextEs : currentStep.extraHelpTextEn
                 }}
                 onComplete={markStepComplete}
                 isCompleted={isStepCompleted(currentStep.id)}
+                locale={isSpanish ? 'es' : 'en'}
               />
             )}
 
