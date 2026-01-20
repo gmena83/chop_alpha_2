@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn } from 'next-auth/react';
-import { useRouter, usePathname } from 'next/navigation';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
@@ -10,7 +10,9 @@ import { Eye, EyeOff, Loader2 } from 'lucide-react';
 export default function LoginPage() {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const locale = pathname.split('/')[1] || 'en';
+  const callbackUrl = searchParams.get('callbackUrl');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -32,8 +34,8 @@ export default function LoginPage() {
       if (result?.error) {
         setError('Invalid email or password');
       } else {
-        router.push(`/${locale}/dashboard`);
-        router.refresh();
+        const redirectUrl = callbackUrl || `/${locale}/dashboard`;
+        window.location.href = redirectUrl;
       }
     } catch (err) {
       setError('An error occurred. Please try again.');

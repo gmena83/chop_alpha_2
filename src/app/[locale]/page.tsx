@@ -122,7 +122,7 @@ export default function HomePage() {
                 <span className="hidden sm:inline">Login</span>
               </Link>
             )}
-            <Link href={`/${locale}/staff`} className="text-xs text-white/60 hover:text-white/80 transition-colors">
+            <Link href={`/${locale}/auth/login?callbackUrl=/${locale}/staff`} className="text-xs text-white/60 hover:text-white/80 transition-colors">
               Staff
             </Link>
           </div>
