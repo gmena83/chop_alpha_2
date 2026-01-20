@@ -1,12 +1,20 @@
 'use client';
 
-import { Footprints, CheckCircle, ArrowRight } from "lucide-react";
+import { Footprints } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PublicHeader from "@/components/public/PublicHeader";
 import PublicFooter from "@/components/public/PublicFooter";
-import MobilityHero from "@/components/public/MobilityHero";
 
-const walkingImage = "/images/person_walking_on_si_cd47e8a3.jpg";
+const heroImage = "/images/person_walking_pedes_36789b8e.jpg";
+const skateboardImage = "/images/teenage_girl_student_936ca063.jpg";
+
+const readinessQuestions = [
+  "Can you follow pedestrian signals and traffic rules?",
+  "Can you cross streets safely at intersections and crosswalks?",
+  "Can you navigate sidewalks while being aware of your surroundings?",
+  "Can you plan a walking route to a specified destination?",
+  "Can you recognize and respond appropriately to traffic hazards?"
+];
 
 export default function PedestrianPage() {
   return (
@@ -14,125 +22,111 @@ export default function PedestrianPage() {
       <PublicHeader />
       
       <main className="flex-1">
-        <MobilityHero
-          title="Pedestrian Mobility"
-          subtitle="Walking Towards Independence"
-          description="Walking is often the first step toward independent mobility. Learn how to navigate sidewalks, crosswalks, and public spaces safely and confidently."
-          heroImage={walkingImage}
-          icon={<Footprints className="h-8 w-8 text-white" />}
-          bgColor="#1a5276"
-        />
-
-        <section className="py-16 md:py-20 bg-white">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276]">
-              Why Walking Matters
-            </h2>
-            <p className="text-gray-600 max-w-4xl mb-12 text-lg leading-relaxed">
-              Pedestrian mobility is the foundation of independent travel. Walking allows individuals to access nearby destinations, connect to other forms of transportation, and build confidence in navigating their environment. For many autistic adolescents, mastering pedestrian skills is the gateway to greater independence.
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-                <img 
-                  src="/images/person_walking_pedes_36789b8e.jpg" 
-                  alt="Person walking safely" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-                <img 
-                  src={walkingImage}
-                  alt="Walking in the community" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-                <img 
-                  src="/images/wheelchair_user_inde_eba74f9d.jpg" 
-                  alt="Accessible pedestrian paths" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-            </div>
+        {/* Hero Section - Pink/Magenta with diagonal */}
+        <section className="relative min-h-[380px] overflow-hidden">
+          <div className="absolute inset-0 bg-[#b5446e]" />
+          
+          <div className="absolute right-0 top-0 bottom-0 w-[55%] hidden lg:block overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${heroImage})` }}
+            />
+            <svg 
+              className="absolute left-0 top-0 h-full w-48" 
+              viewBox="0 0 100 100" 
+              preserveAspectRatio="none"
+            >
+              <polygon points="0,0 100,0 0,100" fill="#b5446e" />
+            </svg>
           </div>
-        </section>
 
-        <section className="py-16 md:py-20 bg-gray-50">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <div className="w-full h-1 mb-8 bg-[#f4d03f]" />
-            
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1a5276]">
-              Key Pedestrian Skills
-            </h2>
-            <p className="text-gray-600 max-w-4xl mb-12 text-lg">
-              The ETA program helps develop essential pedestrian skills that build confidence and safety awareness.
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <CheckCircle className="h-6 w-6 text-[#7cb342]" />
-                  <h3 className="text-xl font-semibold text-[#1a5276]">Crosswalk Safety</h3>
-                </div>
-                <p className="text-gray-600 leading-relaxed">
-                  Learn to recognize crosswalks, understand pedestrian signals, and make safe decisions about when to cross streets.
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <CheckCircle className="h-6 w-6 text-[#7cb342]" />
-                  <h3 className="text-xl font-semibold text-[#1a5276]">Route Planning</h3>
-                </div>
-                <p className="text-gray-600 leading-relaxed">
-                  Develop skills for planning walking routes, identifying landmarks, and navigating to familiar destinations.
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <CheckCircle className="h-6 w-6 text-[#7cb342]" />
-                  <h3 className="text-xl font-semibold text-[#1a5276]">Situational Awareness</h3>
-                </div>
-                <p className="text-gray-600 leading-relaxed">
-                  Build awareness of surroundings, recognize potential hazards, and practice safe pedestrian behaviors.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <Button className="text-white px-6 py-3 font-medium bg-[#1a5276] hover:bg-[#154360]">
-                Take Pedestrian Assessment
-              </Button>
-              <Button 
-                variant="outline" 
-                className="px-6 py-3 font-medium border-2 border-[#1a5276] text-[#1a5276] hover:bg-[#1a5276] hover:text-white flex items-center gap-2"
-              >
-                View Training Resources <ArrowRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        <section className="relative py-16 md:py-20 overflow-hidden bg-[#7cb342]">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative py-12 md:py-16">
             <div className="max-w-lg">
-              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-2 text-[#1a5276]">
-                Ready to Start Walking
-              </h2>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276]">
-                Independently?
-              </h2>
-              <div className="w-20 h-1 mb-6 bg-[#1a5276]" />
-              <p className="mb-8 text-lg leading-relaxed text-[#1a5276]">
-                Take our pedestrian readiness assessment to discover your current skill level and get personalized recommendations for building your walking independence.
-              </p>
+              <div className="mb-6">
+                <Footprints className="h-10 w-10 text-white" />
+              </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="text-white px-6 py-3 font-medium w-full sm:w-auto bg-[#1a5276] hover:bg-[#154360]">
-                  Take Pedestrian Assessment
-                </Button>
+              <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-8">
+                Pedestrian
+              </h1>
+
+              <Button className="bg-[#f4d03f] text-[#1a5276] px-6 py-3 font-medium hover:bg-[#f1c40f] border-2 border-[#b5446e]">
+                Take Our Independent Mobility Assessment
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* What to expect Section */}
+        <section className="py-16 md:py-20 bg-[#f5f5f0]">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gray-800">
+              What to expect.
+            </h2>
+            <p className="text-gray-700 max-w-5xl text-lg leading-relaxed">
+              Walking is often the first step toward independent mobility for autistic adolescents. It provides opportunities to build spatial awareness, practice traffic safety, and develop confidence in navigating community environments. Pedestrian skills form the foundation for all other mobility options, as understanding traffic patterns and environmental cues is essential whether walking, biking, or using transit. With practice and support, walking independently can greatly enhance quality of life and open doors to greater independence.
+            </p>
+          </div>
+        </section>
+
+        {/* Are you ready Section */}
+        <section className="py-16 md:py-20 bg-[#f5f5f0]">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-800">
+              Are you ready to walk independently?
+            </h2>
+            
+            <div className="max-w-3xl">
+              {readinessQuestions.map((question, index) => (
+                <div key={index}>
+                  <p className="text-gray-700 py-4">{question}</p>
+                  {index < readinessQuestions.length - 1 && (
+                    <div className="border-b border-gray-300" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* What mobility options are you ready for? Section */}
+        <section className="py-16 md:py-20 bg-[#f5f5dc]/30">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-2 text-[#1a5276] italic">
+                  What mobility options are you
+                </h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276] italic">
+                  ready for?
+                </h2>
+                <div className="w-16 h-1 bg-[#1a5276] mb-8" />
+                
+                <p className="text-gray-700 leading-relaxed mb-8 text-lg">
+                  Not sure if you are ready to be independently mobile? Click the link below to take the independent mobility assessment. This quick questionnaire will give you more information about what mobility option might be best for you and what skills you need for each.
+                </p>
+
+                <div className="flex flex-col gap-4">
+                  <Button 
+                    variant="outline"
+                    className="px-6 py-3 font-medium w-fit border-2 border-[#1a5276] text-[#1a5276] bg-transparent hover:bg-[#1a5276] hover:text-white"
+                  >
+                    Take our Independent Mobility Assessment
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    className="px-6 py-3 font-medium w-fit border-2 border-[#1a5276] text-[#1a5276] bg-transparent hover:bg-[#1a5276] hover:text-white"
+                  >
+                    Think you are ready to drive? Find Out!
+                  </Button>
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <img 
+                  src={skateboardImage} 
+                  alt="Teen with skateboard" 
+                  className="max-w-full h-auto rounded-lg shadow-lg"
+                />
               </div>
             </div>
           </div>
