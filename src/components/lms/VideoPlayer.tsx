@@ -20,13 +20,32 @@ export function VideoPlayer({ videoUrl, title, onComplete }: VideoPlayerProps) {
   if (isYouTube || isVimeo) {
     let embedUrl = videoUrl;
     if (isYouTube) {
-      const videoId = videoUrl.includes('youtu.be') 
-        ? videoUrl.split('/').pop() 
-        : new URL(videoUrl).searchParams.get('v');
-      embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0`;
+      let videoId: string | null = null;
+      
+      if (videoUrl.includes('/embed/')) {
+        // Already an embed URL - extract ID from path
+        const parts = videoUrl.split('/embed/');
+        videoId = parts[1]?.split('?')[0] || null;
+      } else if (videoUrl.includes('youtu.be')) {
+        // Short URL format
+        videoId = videoUrl.split('/').pop()?.split('?')[0] || null;
+      } else {
+        // Standard watch URL
+        try {
+          videoId = new URL(videoUrl).searchParams.get('v');
+        } catch {
+          videoId = null;
+        }
+      }
+      
+      embedUrl = videoId 
+        ? `https://www.youtube.com/embed/${videoId}?rel=0`
+        : videoUrl;
     } else if (isVimeo) {
-      const videoId = videoUrl.split('/').pop();
-      embedUrl = `https://player.vimeo.com/video/${videoId}`;
+      const videoId = videoUrl.split('/').pop()?.split('?')[0];
+      embedUrl = videoId 
+        ? `https://player.vimeo.com/video/${videoId}`
+        : videoUrl;
     }
 
     return (
