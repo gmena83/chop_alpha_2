@@ -88,7 +88,7 @@ export default function HomePage() {
 
           {/* Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
-            <a href="#about" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
+            <a href="#top" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
               What is Independent Mobility?
             </a>
             <a href="#options" className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors">
@@ -184,6 +184,7 @@ export default function HomePage() {
               <Button 
                 variant="outline"
                 className="text-white px-6 py-3 rounded-sm text-sm font-medium bg-transparent border-2 border-white hover:bg-white hover:text-[#7B8C2A] transition-colors"
+                onClick={() => document.getElementById('mobility-info')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 What is Independent Mobility?
               </Button>
@@ -199,7 +200,7 @@ export default function HomePage() {
         </section>
 
         {/* Mobility Provides Independence Section */}
-        <section className="py-16 md:py-20 bg-white">
+        <section id="mobility-info" className="py-16 md:py-20 bg-white">
           <div className="max-w-[1400px] mx-auto px-4 md:px-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1a5276]">
               Mobility Provides Independence
