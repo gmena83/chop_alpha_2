@@ -5,6 +5,11 @@ import { VideoPlayer } from './VideoPlayer';
 import { Button } from '@/components/ui/button';
 import { Check, Square, CheckSquare, ChevronRight } from 'lucide-react';
 
+interface ChecklistItem {
+  id: string;
+  text: string;
+}
+
 interface StepContentProps {
   step: {
     id: string;
@@ -12,7 +17,7 @@ interface StepContentProps {
     title: string;
     bodyMd?: string;
     videoUrl?: string;
-    checklistItems?: string[];
+    checklistItems?: ChecklistItem[] | string[];
   };
   onComplete: () => void;
   isCompleted: boolean;
@@ -60,25 +65,28 @@ export function StepContent({ step, onComplete, isCompleted }: StepContentProps)
         <div className="bg-gray-50 rounded-xl p-6">
           <h3 className="font-semibold text-[#1a5276] mb-4">Complete all items:</h3>
           <ul className="space-y-3">
-            {step.checklistItems.map((item, index) => (
-              <li key={index}>
-                <button
-                  onClick={() => toggleChecklistItem(index)}
-                  className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all ${
-                    checkedItems.has(index) 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-white text-gray-700 hover:bg-gray-100'
-                  }`}
-                >
-                  {checkedItems.has(index) ? (
-                    <CheckSquare className="h-5 w-5 text-green-600" />
-                  ) : (
-                    <Square className="h-5 w-5 text-gray-400" />
-                  )}
-                  <span className="text-left">{item}</span>
-                </button>
-              </li>
-            ))}
+            {step.checklistItems.map((item, index) => {
+              const itemText = typeof item === 'string' ? item : item.text;
+              return (
+                <li key={index}>
+                  <button
+                    onClick={() => toggleChecklistItem(index)}
+                    className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all ${
+                      checkedItems.has(index) 
+                        ? 'bg-green-100 text-green-800' 
+                        : 'bg-white text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    {checkedItems.has(index) ? (
+                      <CheckSquare className="h-5 w-5 text-green-600" />
+                    ) : (
+                      <Square className="h-5 w-5 text-gray-400" />
+                    )}
+                    <span className="text-left">{itemText}</span>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}
