@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Save, Plus, Pencil, Trash2 } from 'lucide-react';
+import { ArrowLeft, Save, Plus, Pencil, Trash2, AlertTriangle } from 'lucide-react';
 
 interface Step {
   id: string;
@@ -48,6 +48,7 @@ export default function EditModulePage({
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [module, setModule] = useState<Module | null>(null);
@@ -118,6 +119,32 @@ export default function EditModulePage({
       setError('An error occurred while updating the module');
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!confirm('Are you sure you want to delete this module and all its steps? This action cannot be undone.')) {
+      return;
+    }
+
+    setDeleting(true);
+    setError('');
+
+    try {
+      const res = await fetch(`/api/admin/modules/${moduleId}`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        router.push(`/${locale}/staff/modules`);
+      } else {
+        const errorData = await res.json();
+        setError(errorData.error || 'Failed to delete module');
+      }
+    } catch (err) {
+      setError('An error occurred while deleting the module');
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -311,7 +338,20 @@ export default function EditModulePage({
               </CardContent>
             </Card>
 
-            <div className="flex justify-end gap-4">
+            <div className="flex justify-between">
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={handleDelete}
+                disabled={deleting}
+              >
+                {deleting ? (
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                ) : (
+                  <Trash2 className="h-4 w-4 mr-2" />
+                )}
+                Delete Module
+              </Button>
               <Button type="submit" disabled={saving}>
                 {saving ? (
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />

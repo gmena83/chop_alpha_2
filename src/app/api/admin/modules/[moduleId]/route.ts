@@ -82,3 +82,38 @@ export async function PATCH(
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ moduleId: string }> }
+) {
+  try {
+    const session = await auth();
+    if (!session?.user || !(await isAdmin(session))) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+    }
+
+    const { moduleId } = await params;
+    const [existingModule] = await db.select().from(modules).where(eq(modules.id, moduleId));
+    
+    if (!existingModule) {
+      return NextResponse.json({ error: 'Module not found' }, { status: 404 });
+    }
+
+    await db.delete(steps).where(eq(steps.moduleId, moduleId));
+    await db.delete(modules).where(eq(modules.id, moduleId));
+
+    await db.insert(auditLog).values({
+      actorUserId: session.user.id,
+      action: 'module_deleted',
+      targetType: 'module',
+      targetId: moduleId,
+      metadata: { slug: existingModule.slug }
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting module:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}

@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpen, Users, FileCheck, TrendingUp } from 'lucide-react';
 
@@ -12,6 +14,8 @@ interface Stats {
 }
 
 export default function StaffDashboard() {
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'en';
   const [stats, setStats] = useState<Stats>({
     totalModules: 0,
     activeModules: 0,
@@ -131,8 +135,8 @@ export default function StaffDashboard() {
             <CardTitle>Quick Actions</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <a
-              href="/en/staff/modules"
+            <Link
+              href={`/${locale}/staff/modules`}
               className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <div className="flex items-center gap-3">
@@ -144,9 +148,9 @@ export default function StaffDashboard() {
                   </p>
                 </div>
               </div>
-            </a>
-            <a
-              href="/en/staff/users"
+            </Link>
+            <Link
+              href={`/${locale}/staff/users`}
               className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <div className="flex items-center gap-3">
@@ -158,7 +162,7 @@ export default function StaffDashboard() {
                   </p>
                 </div>
               </div>
-            </a>
+            </Link>
           </CardContent>
         </Card>
 

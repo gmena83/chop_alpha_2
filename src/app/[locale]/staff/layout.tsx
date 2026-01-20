@@ -1,6 +1,6 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import Link from 'next/link';
@@ -145,7 +145,7 @@ export default function StaffLayout({
             <Button
               variant="ghost"
               className="w-full justify-start gap-3 text-red-600 hover:text-red-700 hover:bg-red-50"
-              onClick={() => router.push('/api/auth/signout')}
+              onClick={() => signOut({ callbackUrl: `/${locale}` })}
             >
               <LogOut className="h-5 w-5" />
               Sign Out
