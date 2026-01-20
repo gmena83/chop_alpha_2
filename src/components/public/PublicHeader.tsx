@@ -63,7 +63,7 @@ export default function PublicHeader() {
 
         <nav className="hidden lg:flex items-center gap-1">
           <Link 
-            href={`/${locale}`} 
+            href={`/${locale}/what-is-independent-mobility`} 
             className="flex items-center gap-1 text-sm px-3 py-2 hover:text-[#f4d03f] transition-colors"
           >
             What is Independent Mobility?
