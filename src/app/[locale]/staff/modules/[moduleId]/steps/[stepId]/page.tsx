@@ -8,8 +8,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Save, Trash2 } from 'lucide-react';
+import { ArrowLeft, Save, Trash2, HelpCircle } from 'lucide-react';
 import { VideoUploader } from '@/components/upload/VideoUploader';
+import { QuizQuestionEditor, QuizQuestion } from '@/components/staff/QuizQuestionEditor';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface Step {
   id: string;
@@ -25,6 +27,15 @@ interface Step {
   videoUrlEs: string | null;
   checklistItemsEn: string[] | null;
   checklistItemsEs: string[] | null;
+  quizQuestionsEn: QuizQuestion[] | null;
+  quizQuestionsEs: QuizQuestion[] | null;
+  quizPassingThreshold: number | null;
+  helperTextEn: string | null;
+  helperTextEs: string | null;
+  extraHelpVideoUrlEn: string | null;
+  extraHelpVideoUrlEs: string | null;
+  extraHelpTextEn: string | null;
+  extraHelpTextEs: string | null;
   isRequired: boolean;
   isActive: boolean;
 }
@@ -57,6 +68,15 @@ export default function EditStepPage({
     videoUrlEs: '',
     checklistItemsEn: '',
     checklistItemsEs: '',
+    quizQuestionsEn: [] as QuizQuestion[],
+    quizQuestionsEs: [] as QuizQuestion[],
+    quizPassingThreshold: 70,
+    helperTextEn: '',
+    helperTextEs: '',
+    extraHelpVideoUrlEn: '',
+    extraHelpVideoUrlEs: '',
+    extraHelpTextEn: '',
+    extraHelpTextEs: '',
     isRequired: true,
     isActive: true,
   });
@@ -85,6 +105,15 @@ export default function EditStepPage({
           videoUrlEs: data.step.videoUrlEs || '',
           checklistItemsEn: data.step.checklistItemsEn?.join('\n') || '',
           checklistItemsEs: data.step.checklistItemsEs?.join('\n') || '',
+          quizQuestionsEn: data.step.quizQuestionsEn || [],
+          quizQuestionsEs: data.step.quizQuestionsEs || [],
+          quizPassingThreshold: data.step.quizPassingThreshold || 70,
+          helperTextEn: data.step.helperTextEn || '',
+          helperTextEs: data.step.helperTextEs || '',
+          extraHelpVideoUrlEn: data.step.extraHelpVideoUrlEn || '',
+          extraHelpVideoUrlEs: data.step.extraHelpVideoUrlEs || '',
+          extraHelpTextEn: data.step.extraHelpTextEn || '',
+          extraHelpTextEs: data.step.extraHelpTextEs || '',
           isRequired: data.step.isRequired,
           isActive: data.step.isActive,
         });
@@ -122,6 +151,15 @@ export default function EditStepPage({
         payload.videoUrlEs = formData.videoUrlEs;
         payload.bodyMdEn = formData.bodyMdEn;
         payload.bodyMdEs = formData.bodyMdEs;
+        payload.quizQuestionsEn = formData.quizQuestionsEn.length > 0 ? formData.quizQuestionsEn : null;
+        payload.quizQuestionsEs = formData.quizQuestionsEs.length > 0 ? formData.quizQuestionsEs : null;
+        payload.quizPassingThreshold = formData.quizQuestionsEn.length > 0 ? formData.quizPassingThreshold : null;
+        payload.helperTextEn = formData.helperTextEn || null;
+        payload.helperTextEs = formData.helperTextEs || null;
+        payload.extraHelpVideoUrlEn = formData.extraHelpVideoUrlEn || null;
+        payload.extraHelpVideoUrlEs = formData.extraHelpVideoUrlEs || null;
+        payload.extraHelpTextEn = formData.extraHelpTextEn || null;
+        payload.extraHelpTextEs = formData.extraHelpTextEs || null;
       } else if (formData.stepType === 'checklist') {
         payload.checklistItemsEn = formData.checklistItemsEn
           .split('\n')
@@ -379,6 +417,155 @@ export default function EditStepPage({
                     }
                     rows={6}
                   />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                Quiz Questions
+                <Badge variant="outline" className="text-xs font-normal">Optional</Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <p className="text-sm text-gray-500">
+                Add questions to test learner comprehension after watching the video. Learners must achieve the passing threshold to proceed.
+              </p>
+              
+              <div className="space-y-2">
+                <Label>Passing Threshold</Label>
+                <Select
+                  value={formData.quizPassingThreshold.toString()}
+                  onValueChange={(value) => setFormData({ ...formData, quizPassingThreshold: parseInt(value) })}
+                >
+                  <SelectTrigger className="w-48">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="70">70% (Minimum)</SelectItem>
+                    <SelectItem value="80">80% (Standard)</SelectItem>
+                    <SelectItem value="90">90% (High)</SelectItem>
+                    <SelectItem value="100">100% (Perfect)</SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-gray-500">Learners must score at least this percentage to continue</p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <Label className="text-base font-semibold">English Questions</Label>
+                  <QuizQuestionEditor
+                    questions={formData.quizQuestionsEn}
+                    onChange={(questions) => setFormData({ ...formData, quizQuestionsEn: questions })}
+                    language="en"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <Label className="text-base font-semibold">Spanish Questions</Label>
+                  <QuizQuestionEditor
+                    questions={formData.quizQuestionsEs}
+                    onChange={(questions) => setFormData({ ...formData, quizQuestionsEs: questions })}
+                    language="es"
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                Helper Text
+                <Badge variant="outline" className="text-xs font-normal">Optional</Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <p className="text-sm text-gray-500">
+                Additional guidance or tips displayed alongside the video to help learners understand the content.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="helperTextEn">Helper Text (English)</Label>
+                  <Textarea
+                    id="helperTextEn"
+                    value={formData.helperTextEn}
+                    onChange={(e) => setFormData({ ...formData, helperTextEn: e.target.value })}
+                    rows={4}
+                    placeholder="Tips, reminders, or key points for this video..."
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="helperTextEs">Helper Text (Spanish)</Label>
+                  <Textarea
+                    id="helperTextEs"
+                    value={formData.helperTextEs}
+                    onChange={(e) => setFormData({ ...formData, helperTextEs: e.target.value })}
+                    rows={4}
+                    placeholder="Consejos, recordatorios o puntos clave para este video..."
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <HelpCircle className="h-5 w-5" />
+                Need Extra Help Resources
+                <Badge variant="outline" className="text-xs font-normal">Optional</Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <p className="text-sm text-gray-500">
+                Provide additional resources for learners who need more help. This will appear as a "Need Extra Help?" button.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <Label className="text-base font-semibold">English Resources</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="extraHelpVideoUrlEn">Extra Help Video URL</Label>
+                    <Input
+                      id="extraHelpVideoUrlEn"
+                      value={formData.extraHelpVideoUrlEn}
+                      onChange={(e) => setFormData({ ...formData, extraHelpVideoUrlEn: e.target.value })}
+                      placeholder="https://youtube.com/embed/..."
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="extraHelpTextEn">Extra Help Text</Label>
+                    <Textarea
+                      id="extraHelpTextEn"
+                      value={formData.extraHelpTextEn}
+                      onChange={(e) => setFormData({ ...formData, extraHelpTextEn: e.target.value })}
+                      rows={4}
+                      placeholder="Additional explanations, step-by-step guides, or resources..."
+                    />
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <Label className="text-base font-semibold">Spanish Resources</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="extraHelpVideoUrlEs">Extra Help Video URL</Label>
+                    <Input
+                      id="extraHelpVideoUrlEs"
+                      value={formData.extraHelpVideoUrlEs}
+                      onChange={(e) => setFormData({ ...formData, extraHelpVideoUrlEs: e.target.value })}
+                      placeholder="https://youtube.com/embed/..."
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="extraHelpTextEs">Extra Help Text</Label>
+                    <Textarea
+                      id="extraHelpTextEs"
+                      value={formData.extraHelpTextEs}
+                      onChange={(e) => setFormData({ ...formData, extraHelpTextEs: e.target.value })}
+                      rows={4}
+                      placeholder="Explicaciones adicionales, guías paso a paso, o recursos..."
+                    />
+                  </div>
                 </div>
               </div>
             </CardContent>
