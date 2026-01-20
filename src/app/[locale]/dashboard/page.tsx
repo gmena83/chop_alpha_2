@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 import { ProgressCard } from '@/components/lms/ProgressCard';
 import { MilestoneCard } from '@/components/lms/MilestoneCard';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Trophy, Clock, TrendingUp, LogOut, User } from 'lucide-react';
+import { BookOpen, Trophy, Clock, TrendingUp, LogOut, User, Home } from 'lucide-react';
 
 interface Module {
   id: string;
@@ -56,6 +58,8 @@ interface ProgressData {
 
 export default function DashboardPage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'en';
   const [data, setData] = useState<ProgressData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -69,7 +73,7 @@ export default function DashboardPage() {
       const response = await fetch('/api/progress');
       if (!response.ok) {
         if (response.status === 401) {
-          router.push('/en/auth/login');
+          router.push(`/${locale}/auth/login`);
           return;
         }
         throw new Error('Failed to fetch progress');
@@ -124,15 +128,20 @@ export default function DashboardPage() {
       <header className="bg-[#5b2c6f] text-white py-4">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-2xl font-bold text-[#f4d03f]">ETA</span>
-            <span className="text-sm">Empowering Transportation among Autistic adolescents</span>
+            <Link href={`/${locale}`} className="flex items-center gap-3 hover:opacity-80">
+              <span className="text-2xl font-bold text-[#f4d03f]">ETA</span>
+              <span className="text-sm hidden sm:inline">Empowering Transportation among Autistic adolescents</span>
+            </Link>
           </div>
           <div className="flex items-center gap-4">
-            <button className="flex items-center gap-2 text-sm hover:text-[#f4d03f]">
-              <User className="h-4 w-4" />
-              Profile
-            </button>
-            <button className="flex items-center gap-2 text-sm hover:text-[#f4d03f]">
+            <Link href={`/${locale}`} className="flex items-center gap-2 text-sm hover:text-[#f4d03f]">
+              <Home className="h-4 w-4" />
+              Home
+            </Link>
+            <button 
+              onClick={() => signOut({ callbackUrl: `/${locale}` })}
+              className="flex items-center gap-2 text-sm hover:text-[#f4d03f]"
+            >
               <LogOut className="h-4 w-4" />
               Logout
             </button>
@@ -208,7 +217,7 @@ export default function DashboardPage() {
                   progress={getModuleProgress(module.id)}
                   status={getModuleStatus(module.id)}
                   estimatedMinutes={module.estimatedMinutes}
-                  onClick={() => router.push(`/en/modules/${module.id}`)}
+                  onClick={() => router.push(`/${locale}/modules/${module.id}`)}
                 />
               ))}
             </div>
@@ -227,7 +236,7 @@ export default function DashboardPage() {
                   progress={getModuleProgress(module.id)}
                   status={getModuleStatus(module.id)}
                   estimatedMinutes={module.estimatedMinutes}
-                  onClick={() => router.push(`/en/modules/${module.id}`)}
+                  onClick={() => router.push(`/${locale}/modules/${module.id}`)}
                 />
               ))}
             </div>

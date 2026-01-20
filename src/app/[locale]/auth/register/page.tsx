@@ -1,13 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 
 export default function RegisterPage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'en';
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,7 +46,7 @@ export default function RegisterPage() {
       if (!response.ok) {
         setError(data.error || 'Registration failed');
       } else {
-        router.push('/en/auth/login?registered=true');
+        router.push(`/${locale}/auth/login?registered=true`);
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
@@ -57,7 +59,7 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-gradient-to-br from-[#5b2c6f] to-[#1a5276] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/en" className="inline-block">
+          <Link href={`/${locale}`} className="inline-block">
             <span className="text-4xl font-bold text-[#f4d03f]">ETA</span>
           </Link>
           <p className="text-white/80 mt-2">Empowering Transportation among Autistic adolescents</p>
@@ -161,7 +163,7 @@ export default function RegisterPage() {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Already have an account?{' '}
-              <Link href="/en/auth/login" className="text-[#1a5276] font-medium hover:underline">
+              <Link href={`/${locale}/auth/login`} className="text-[#1a5276] font-medium hover:underline">
                 Sign In
               </Link>
             </p>

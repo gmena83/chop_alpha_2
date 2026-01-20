@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { 
@@ -28,6 +28,8 @@ const therapistImage1 = "/images/occupational_therapi_ca8af19f.jpg";
 const therapistImage2 = "/images/occupational_therapi_c4615718.jpg";
 
 export default function HomePage() {
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'en';
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const testimonials = [
@@ -64,7 +66,7 @@ export default function HomePage() {
         <div className="w-full px-4 md:px-8 flex h-16 items-center justify-between max-w-[1400px] mx-auto">
           <div className="flex items-center gap-6">
             {/* ETA Logo */}
-            <a href="/" className="flex items-center gap-3">
+            <Link href={`/${locale}`} className="flex items-center gap-3">
               <div className="flex items-center">
                 <span className="text-2xl font-bold text-[#f4d03f]">ET</span>
                 <span className="text-2xl font-bold flex items-center text-[#f4d03f]">
@@ -78,7 +80,7 @@ export default function HomePage() {
                 <span className="text-xs font-medium leading-tight block">Empowering Transportation</span>
                 <span className="text-xs font-medium leading-tight block">among Autistic adolescents</span>
               </div>
-            </a>
+            </Link>
           </div>
 
           {/* Navigation */}
@@ -106,15 +108,15 @@ export default function HomePage() {
               <Search className="h-4 w-4" />
               <span className="hidden sm:inline">Search</span>
             </button>
-            <Link href="/en/dashboard" className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
+            <Link href={`/${locale}/dashboard`} className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
               <LayoutDashboard className="h-4 w-4" />
               <span className="hidden sm:inline">Dashboard</span>
             </Link>
-            <Link href="/en/auth/login" className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
+            <Link href={`/${locale}/auth/login`} className="flex items-center gap-1 text-sm hover:text-[#f4d03f] transition-colors">
               <User className="h-4 w-4" />
               <span className="hidden sm:inline">Login</span>
             </Link>
-            <Link href="/en/staff" className="flex items-center gap-1 text-sm bg-[#f4d03f] text-[#5b2c6f] px-3 py-1 rounded-md font-medium hover:bg-[#f4d03f]/90 transition-colors">
+            <Link href={`/${locale}/staff`} className="flex items-center gap-1 text-sm bg-[#f4d03f] text-[#5b2c6f] px-3 py-1 rounded-md font-medium hover:bg-[#f4d03f]/90 transition-colors">
               <span>Staff Portal</span>
             </Link>
           </div>
