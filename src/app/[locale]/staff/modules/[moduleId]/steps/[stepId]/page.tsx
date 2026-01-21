@@ -337,6 +337,7 @@ export default function EditStepPage({
         </Card>
 
         {step.stepType === 'video' && (
+          <>
           <Card className="mb-6">
             <CardHeader>
               <CardTitle>Video Content</CardTitle>
@@ -570,6 +571,7 @@ export default function EditStepPage({
               </div>
             </CardContent>
           </Card>
+          </>
         )}
 
         {step.stepType === 'content' && (
