@@ -28,9 +28,9 @@ export default function PublicHeader() {
   ];
 
   const prepareOptions = [
-    { label: 'How to Prepare', href: '#' },
-    { label: 'Build Mobility Skills', href: '#' },
-    { label: 'Resources and Support', href: '#' },
+    { label: 'How to Prepare', href: `/${locale}/prepare-to-be-mobile` },
+    { label: 'Build Mobility Skills', href: `/${locale}/prepare-to-be-mobile#build-skills` },
+    { label: 'Resources and Support', href: `/${locale}/prepare-to-be-mobile#resources` },
   ];
 
   const drivingOptions = [
