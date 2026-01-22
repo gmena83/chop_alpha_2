@@ -90,6 +90,18 @@ Preferred communication style: Simple, everyday language.
 
 ### Staff Portal
 - **Staff Dashboard** (`/[locale]/staff`): Overview stats, quick actions, system status
+  - **Research Analytics Dashboard**: 3x3 grid with 9 engagement metrics:
+    1. Avg. Lesson Completion Time (with sparkline)
+    2. Quiz Pass Rate - 1st Try (with sparkline)
+    3. Module Drop-off Points (bar chart visualization)
+    4. Avg. Sessions per Week (with sparkline)
+    5. Co-Pilot Ratio - Parent vs Student sessions
+    6. Churn Warning - 14-day inactive accounts
+    7. Onboarding Success Rate (with sparkline)
+    8. Velocity to Milestone - Days to Permit Readiness
+    9. User Sentiment NPS Score (with sparkline)
+  - All metrics display anonymized aggregate data (no PII)
+  - Uses Recharts for data visualizations
 - **Module Management** (`/[locale]/staff/modules`): 
   - Create, edit, and organize learning modules
   - Manage steps with video uploads, video URLs, markdown content, and checklists
