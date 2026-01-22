@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { db } from '@/db';
 import { users, modules, userProgress, assessmentResponses, progressEvents, families, userMilestones } from '@/db/schema';
 import { count, sql, eq, gte, and, desc } from 'drizzle-orm';
+import { getAllAnalytics } from '@/lib/analyticsService';
 
 export async function GET(request: NextRequest) {
   try {
@@ -83,8 +84,11 @@ export async function GET(request: NextRequest) {
     const completionRate = totalProgress > 0 ? Math.round((completedProgress / totalProgress) * 100) : 0;
 
     const milestonesEarned = await db.select({ count: count() }).from(userMilestones);
+    
+    const dashboardMetrics = await getAllAnalytics();
 
     return NextResponse.json({
+      dashboardMetrics,
       overview: {
         totalUsers: totalUsersResult[0]?.count || 0,
         activeModules: activeModulesResult[0]?.count || 0,
