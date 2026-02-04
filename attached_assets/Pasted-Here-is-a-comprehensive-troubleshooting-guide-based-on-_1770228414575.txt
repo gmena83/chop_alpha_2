@@ -1,0 +1,60 @@
+Here is a comprehensive troubleshooting guide based on common Replit deployment errors, configured to help you guide the Replit Agent to fix them.
+
+Since the Agent works best with specific context and error details, you can paste the relevant "Agent Prompt" sections below directly into the chat when you encounter these specific symptoms.
+
+### 1. Networking & Port Configuration Errors
+**Symptoms:** "Bad Gateway," infinite loading spinners, or the app works in the preview but fails at the public URL.
+
+*   **Potential Issue:** The application server is listening on `localhost` (127.0.0.1) instead of `0.0.0.0`. In Replit's cloud environment, external ports must bind to `0.0.0.0` to be accessible.
+*   **Potential Issue:** The port defined in your code (e.g., 3000) does not match the port configured in the `.replit` file or the deployment settings.
+*   **Agent Prompt:**
+    > "The deployment is failing to route traffic. Please check the server startup code. Ensure the app listens on host `0.0.0.0` rather than `localhost` or `127.0.0.1`. Also, verify that the `[[ports]]` configuration in the `.replit` file matches the port the server is actually listening on."
+
+### 2. Dependency & Environment Errors
+**Symptoms:** "Module not found," "Command not found," or immediate crashes upon startup.
+
+*   **Potential Issue (System Deps):** Your app relies on a system-level tool (like `ffmpeg`, `cmake`, or a specific driver) that isn't installed in the Nix environment.
+*   **Potential Issue (Package Files):** The `package.json`, `poetry.lock`, or `requirements.txt` file is missing or out of sync with the actual code imports.
+*   **Agent Prompt:**
+    > "I am getting a 'Module not found' error. Please review `replit.nix` to ensure all system-level dependencies are present. Then, check the package configuration files (like package.json or pyproject.toml) to ensure all libraries imported in the code are listed as dependencies. Run a dependency install command if necessary."
+
+### 3. Database Connection & Migration Issues
+**Symptoms:** App crashes regarding "tables not found," data missing after deploy, or connection timeouts.
+
+*   **Potential Issue (Dev vs. Prod):** Replit uses separate databases for Development and Production to prevent data loss. The Agent may have modified the Dev schema, but those changes haven't been applied (migrated) to the Production database.
+*   **Potential Issue (Schema Drift):** Changing column types or removing columns in code without running a migration will break the production app.
+*   **Agent Prompt:**
+    > "The production database seems to be out of sync with the codebase. Please compare the current Drizzle/Prisma schema with the production database state. Generate and apply a migration script to update the production database schema so it matches the application code."
+
+### 4. Missing Secrets (Environment Variables)
+**Symptoms:** 401/403 Unauthorized errors, API calls failing, or blank screens where data should be.
+
+*   **Potential Issue:** Secrets (API keys, DB URLs) stored in the Workspace do not automatically sync to the Deployment environment in all cases, or a specific key was missed.
+*   **Potential Issue:** Hardcoded API keys in the frontend that work locally but fail due to domain restrictions or security headers in production.
+*   **Agent Prompt:**
+    > "It looks like an authentication or API error. Please verify that all environment variables listed in the Secrets pane are correctly propagated to the Deployment environment. Specifically check that `[Insert Key Name]` is accessible in the production runtime."
+
+### 5. Build Command Failures
+**Symptoms:** "Exit status 1" during the build phase, or the app deploys but serves an old version.
+
+*   **Potential Issue:** The `[deployment]` section in the `.replit` file has an incorrect `run` or `build` command (e.g., trying to run `npm start` without running `npm run build` first for a React app).
+*   **Potential Issue:** The build command is trying to access a development-only dependency that isn't available in the production environment.
+*   **Agent Prompt:**
+    > "The deployment build phase is failing. Check the `[deployment]` section of the `.replit` file. Ensure the `build` command successfully compiles the assets and that the `run` command points to the correct entry point. Remove any dev-only flags from the production start command."
+
+### 6. Performance & Timeout Issues
+**Symptoms:** The app deploys but crashes during specific heavy tasks (e.g., processing files, generating images) or runs very slowly compared to the workspace.
+
+*   **Potential Issue:** Autoscale deployments scale to zero and may have lower CPU/RAM limits than the workspace. Heavy processing tasks often fail on Autoscale and require a Reserved VM.
+*   **Fix Recommendation:** This is often an infrastructure choice rather than a code fix. If the Agent cannot fix this via code optimization, ask:
+    > "Is this process memory or CPU intensive? If so, should we switch the deployment type from Autoscale to a Reserved VM to handle the load?"
+
+### Summary Checklist for the Agent
+If you want to ask the Agent to do a full sweep, copy and paste this prompt:
+
+> "I am encountering deployment errors. Please perform a comprehensive check on the following:
+> 1. **Networking:** Ensure the server listens on `0.0.0.0` and the exposed port matches the `.replit` config.
+> 2. **Secrets:** Verify all necessary environment variables are being read correctly.
+> 3. **Database:** Check if the production database schema matches the codebase and if migrations are required.
+> 4. **Dependencies:** Confirm `replit.nix` and package files include all necessary libraries.
+> 5. **Build Config:** Verify the `run` and `build` commands in the `.replit` file are correct for a production environment."
