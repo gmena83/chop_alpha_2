@@ -51,3 +51,6 @@ externalPort = 80
 [userenv.shared]
 AUTH_SECRET = "/obAmhSYlhFXNJqP7i9Fp15UjCX0/hRK/6tWOVKiVmo="
 AUTH_TRUST_HOST = "true"
+
+[objectStorage]
+defaultBucketID = "replit-objstore-00f18216-b728-4747-804b-64149c884e4c"
