@@ -1,6 +1,15 @@
 import { Storage, File } from "@google-cloud/storage";
-import { Response } from "express";
 import { randomUUID } from "crypto";
+import { Readable } from "stream";
+
+// Custom response interface to avoid Express dependency
+interface StreamableResponse {
+  set(headers: Record<string, string | number | undefined>): void;
+  status(code: number): { json(data: unknown): void };
+  headersSent: boolean;
+}
+
+type Response = StreamableResponse & NodeJS.WritableStream;
 import {
   ObjectAclPolicy,
   ObjectPermission,
