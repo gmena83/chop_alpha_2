@@ -131,3 +131,8 @@ dist
 
 # Replit debugger
 .breakpoints
+
+# Large design files (exceed GitHub 100MB limit)
+*.fig
+attached_assets/*.fig
+attached_assets/Figma_project/*.pdf
