@@ -136,3 +136,4 @@ dist
 *.fig
 attached_assets/*.fig
 attached_assets/Figma_project/*.pdf
+node_modules
