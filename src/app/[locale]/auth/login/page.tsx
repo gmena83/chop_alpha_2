@@ -33,13 +33,20 @@ export default function LoginPage() {
 
       if (result?.error) {
         setError('Invalid email or password');
+        setLoading(false);
       } else {
-        const redirectUrl = callbackUrl || `/${locale}/dashboard`;
+        // Fetch the session to get the user's role
+        const response = await fetch('/api/auth/session');
+        const session = await response.json();
+
+        const role = session?.user?.role;
+        const isAdminOrStaff = ['admin', 'super_admin', 'professional', 'research_staff'].includes(role);
+
+        const redirectUrl = callbackUrl || (isAdminOrStaff ? `/${locale}/staff` : `/${locale}/dashboard`);
         window.location.href = redirectUrl;
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
-    } finally {
       setLoading(false);
     }
   };
