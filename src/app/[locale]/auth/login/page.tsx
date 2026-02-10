@@ -33,13 +33,20 @@ export default function LoginPage() {
 
       if (result?.error) {
         setError('Invalid email or password');
+        setLoading(false);
       } else {
-        const redirectUrl = callbackUrl || `/${locale}/dashboard`;
+        // Fetch the session to get the user's role
+        const response = await fetch('/api/auth/session');
+        const session = await response.json();
+
+        const role = session?.user?.role;
+        const isAdminOrStaff = ['admin', 'super_admin', 'professional', 'research_staff'].includes(role);
+
+        const redirectUrl = callbackUrl || (isAdminOrStaff ? `/${locale}/staff` : `/${locale}/dashboard`);
         window.location.href = redirectUrl;
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
-    } finally {
       setLoading(false);
     }
   };
@@ -117,6 +124,62 @@ export default function LoginPage() {
                 'Sign In'
               )}
             </Button>
+
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="bg-white px-2 text-gray-500">Demo Access</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('ryan.warren@aimsinnovations.com');
+                  setPassword('ETA@Admin2024!');
+                }}
+                className="flex flex-col items-center justify-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-sm font-medium text-[#1a5276]">Admin</span>
+                <span className="text-xs text-gray-500">Full Access</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('staff@demo.com');
+                  setPassword('DemoPass123!');
+                }}
+                className="flex flex-col items-center justify-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-sm font-medium text-[#1a5276]">Staff</span>
+                <span className="text-xs text-gray-500">Professional</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('parent@demo.com');
+                  setPassword('DemoPass123!');
+                }}
+                className="flex flex-col items-center justify-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-sm font-medium text-[#1a5276]">Parent</span>
+                <span className="text-xs text-gray-500">Guardian</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('teen@demo.com');
+                  setPassword('DemoPass123!');
+                }}
+                className="flex flex-col items-center justify-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-sm font-medium text-[#1a5276]">Teen</span>
+                <span className="text-xs text-gray-500">Participant</span>
+              </button>
+            </div>
           </form>
 
           <div className="mt-6 text-center">
